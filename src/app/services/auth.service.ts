@@ -8,9 +8,15 @@ import {LoginUser} from "../_models/login-user";
 export class AuthService {
   isLoggedIn = false;
   role: string;
+  settings: string;
 
   constructor(public http : HttpClient, @Inject("baseURL") public baseURL : string) {
-    this.role = "";
+    if (localStorage.getItem("token") != null) {
+      this.isLoggedIn = true;
+    }
+    this.settings = localStorage.getItem("settings") || "";
+    this.role = localStorage.getItem("role") || "";
+
   }
 
   loginAdmin(user: LoginUser) {

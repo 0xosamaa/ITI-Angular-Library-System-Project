@@ -14,7 +14,13 @@ export class AdminGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.authService.isLoggedIn && this.authService.role === "admin") {
-      return true;
+      if(this.authService.settings === "manual") {
+        return true;
+      } else {
+        // redirect to profile to set new password
+        this.router.navigateByUrl("/admin/profile");
+        return false;
+      }
     } else {
       this.router.navigateByUrl("/workers/login");
       return false;
