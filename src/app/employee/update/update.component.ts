@@ -9,6 +9,7 @@ import {EmployeeService} from "../../services/employee.service";
 })
 export class UpdateComponent {
    @Input() employee:Employee;
+   @Input() user:string;
    visible:boolean = false;
    settings: any[] = [];
    setting: any;
@@ -21,13 +22,14 @@ export class UpdateComponent {
       "",
       "",
       "",
-      "",
+      undefined,
       "",
       "",
       "",
       "",
       0
     );
+    this.user = "";
 
     this.settings = [
       {name: 'Manual', code: 'manual'},
@@ -47,6 +49,7 @@ export class UpdateComponent {
 
     this.birthDate = new Date(this.employee.birthDate);
     this.hireDate = new Date(this.employee.hireDate);
+    this.employee.password = undefined;
 
   }
 
@@ -55,11 +58,19 @@ export class UpdateComponent {
   }
 
   save() {
+
     this.employee.birthDate = this.birthDate.toISOString();
     this.employee.hireDate = this.hireDate.toISOString();
     this.employee.settings = this.setting.code;
+    console.log(this.employee);
     this.empService.updateEmployee(this.employee).subscribe(
       (data:any) => {
+        if (this.user == "emp"){
+          localStorage.setItem('data', JSON.stringify(this.employee));
+          if (this.employee.settings == "manual"){
+            localStorage.setItem('settings', "manual");
+          }
+        }
         this.visible = false;
       },
       (error) => {

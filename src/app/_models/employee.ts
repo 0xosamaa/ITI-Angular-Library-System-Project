@@ -3,14 +3,14 @@ export class Employee {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  password: string | undefined;
   birthDate: string;
   settings: string;
   hireDate: string;
   image: string;
   salary: number;
 
-  constructor(_id: string, firstName: string, lastName: string, email: string, password: string, birthDate: string, settings: string, hireDate: string, image: string, salary: number) {
+  constructor(_id: string, firstName: string, lastName: string, email: string, password: string | undefined, birthDate: string, settings: string, hireDate: string, image: string, salary: number) {
     this._id = _id;
     this.firstName = firstName;
     this.lastName = lastName;

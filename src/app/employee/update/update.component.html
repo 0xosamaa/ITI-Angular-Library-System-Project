@@ -8,27 +8,31 @@
       <label>First Name : </label>
       <input pInputText   placeholder="First Name" [(ngModel)]="employee.firstName" />
     </div>
-    <div class="info-card">
+    <div *ngIf="user === 'admin'" class="info-card">
       <label>HireDate : </label>
       <p-calendar styleClass="p-calendar-w-btn" [(ngModel)]="hireDate"></p-calendar>
-    </div>
-    <div class="info-card">
-      <label>Last Name : </label>
-      <input pInputText   placeholder="Last Name" [(ngModel)]="employee.lastName" />
     </div>
     <div class="info-card">
       <label>BirthDate : </label>
       <p-calendar [(ngModel)]="birthDate"></p-calendar>
     </div>
     <div class="info-card">
+      <label>Last Name : </label>
+      <input pInputText   placeholder="Last Name" [(ngModel)]="employee.lastName" />
+    </div>
+    <div class="info-card">
       <label>Email : </label>
       <input pInputText   placeholder="Email" [(ngModel)]="employee.email" />
     </div>
-    <div class="info-card">
+    <div *ngIf="user === 'admin'" class="info-card">
       <label>Salary : </label>
       <input pInputText   placeholder="Salary" [(ngModel)]="employee.salary" />
     </div>
-    <div class="info-card">
+    <div *ngIf="user === 'emp'"  class="info-card">
+      <label>Password : </label>
+      <p-password  placeholder="Password" [(ngModel)]="employee.password" />
+    </div>
+    <div *ngIf="user === 'admin'" class="info-card">
       <label>settings : </label>
       <p-dropdown [options]="settings" [(ngModel)]="setting" optionLabel="name"></p-dropdown>
     </div>

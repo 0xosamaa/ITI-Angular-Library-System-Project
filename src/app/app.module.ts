@@ -26,6 +26,9 @@ import {PasswordModule} from "primeng/password";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import { WorkerLoginComponent } from './login/worker-login/worker-login.component';
+import { ProfileComponent } from './employee/profile/profile.component';
+import {DividerModule} from "primeng/divider";
+import {MessagesModule} from "primeng/messages";
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import { WorkerLoginComponent } from './login/worker-login/worker-login.componen
     EmployeeListComponent,
     UpdateComponent,
     AddEmployeeComponent,
-    WorkerLoginComponent
+    WorkerLoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { WorkerLoginComponent } from './login/worker-login/worker-login.componen
     InputTextModule,
     PasswordModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DividerModule,
+    MessagesModule
   ],
   providers: [
     {provide: "baseURL", useValue: "http://localhost:8080"},
