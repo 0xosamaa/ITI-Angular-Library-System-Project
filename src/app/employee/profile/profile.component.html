@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+  <div class="img">
+    <img src="https://www.w3schools.com/w3images/paris.jpg" alt="Paris" style="width:100%;">
+  </div>
+
+    <p-messages *ngIf="userData.settings == 'default'" [(value)]="message" [enableService]="false" [closable]="false"></p-messages>
+
+  <div class="info">
+    <div class="left">
+      <div class="card1">
+        <h3>First Name : </h3>
+        <h4>{{userData.firstName}}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Last Name : </h3>
+        <h4>{{userData.lastName}}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Email : </h3>
+        <h4>{{userData.email}}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Salary : </h3>
+        <h4>{{userData.salary}}</h4>
+      </div>
+      <p-divider></p-divider>
+    </div>
+    <div class="right">
+      <div class="card1">
+        <h3>BirthDate : </h3>
+        <h4>{{userData.birthDate}}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>HireDate : </h3>
+        <h4>{{userData.hireDate}}</h4>
+      </div>
+      <p-divider></p-divider>
+    </div>
+  </div>
+  <p-button (click)="logout()" label="LogOut" styleClass="p-button-outlined p-button-danger"></p-button>
+  <p-button (click)="updateProfile()" label="Update Profile" styleClass="p-button-outlined p-button-success"></p-button>
+
+  <app-update [employee]="userData" user="emp" ></app-update>
+
+
+</div>

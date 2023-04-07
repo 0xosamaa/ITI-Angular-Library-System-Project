@@ -1,0 +1,21 @@
+
+
+  <div class="login">
+    <div class="p-fluid">
+      <div class="field">
+        <label for="email">Email</label>
+        <input [(ngModel)]="worker.email" pInputText id="email" type="text" />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input [(ngModel)]="worker.password" pInputText id="password" type="password" />
+      </div>
+
+      <div style="display: flex; justify-content: space-evenly">
+        <p-button (click)="login()" label="Login"></p-button>
+        <p-dropdown [options]="settings" [(ngModel)]="setting" optionLabel="name"></p-dropdown>
+      </div>
+
+    </div>
+  </div>
+
