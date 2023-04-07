@@ -25,6 +25,7 @@ import { AddEmployeeComponent } from './employee/add-employee/add-employee.compo
 import {PasswordModule} from "primeng/password";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { WorkerLoginComponent } from './login/worker-login/worker-login.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     TestComponent,
     EmployeeListComponent,
     UpdateComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    WorkerLoginComponent
   ],
   imports: [
     BrowserModule,
