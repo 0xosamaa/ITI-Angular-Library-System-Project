@@ -22,9 +22,6 @@ export class TestComponent implements OnInit{
         this.authService.role = "admin";
         //localStorage.setItem("token", (<any>data)["token"]);
       },
-      (error) => {
-        console.log(error);
-      }
     );
   }
 

@@ -1,0 +1,134 @@
+
+  <p-table #dt2 [value]="employees" dataKey="id"
+           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [globalFilterFields]="['name','country.name','representative.name','status']">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Settings</th>
+        <th>Operations</th>
+
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter type="text" field="firstName"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="lastName"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="email"></p-columnFilter>
+        </th>
+
+        <th>
+          <p-columnFilter type="text" field="salary"></p-columnFilter>
+        </th>
+
+
+        <th>
+          <p-columnFilter field="settings" matchMode="equals" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+      <tr>
+        <td>
+          {{employee.firstName}}
+        </td>
+        <td>
+          {{employee.lastName}}
+        </td>
+        <td>
+          {{employee.email}}
+        </td>
+        <td>
+          {{employee.salary}}
+        </td>
+
+        <td>
+          <p-tag *ngIf="employee.settings == 'manual'" severity="success" value="Manual"></p-tag>
+          <p-tag *ngIf="employee.settings == 'default'" severity="danger" value="Default"></p-tag>
+        </td>
+        <td style="display: flex; gap: 10px">
+          <p-button  (click)="showDialog(employee)" styleClass="p-button-secondary" label="Show"></p-button>
+          <p-button  (click)="updateDialog(employee)" styleClass="p-button-success" label="Update"></p-button>
+          <p-button (click)="confirm(employee._id)" icon="pi pi-times" label="Delete" class="p-button-danger"></p-button>
+        </td>
+
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">No customers found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+  <p-dialog header="Employee Information" [(visible)]="detailsVisible" [modal]="true" [style]="{width: '80vw'}">
+    <div class="cont">
+
+      <div class="info-card">
+        <h3>ID :</h3>
+        <h4>{{employee._id}}</h4>
+      </div>
+      <hr>
+      <div class="info-card">
+        <h3>First Name :</h3>
+        <h4>{{employee.firstName}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>Last Name :</h3>
+        <h4>{{employee.lastName}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>Email :</h3>
+        <h4>{{employee.email}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>BirthDate :</h3>
+        <h4>{{employee.birthDate}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>HireDate :</h3>
+        <h4>{{employee.hireDate}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>Salary :</h3>
+        <h4>{{employee.salary}}</h4>
+      </div>
+      <div class="info-card">
+        <h3>Settings :</h3>
+        <h4>{{employee.settings}}</h4>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+
+
+  <div class="add-button" (click)="addDialog()">
+    <h1>+</h1>
+  </div>
+
+  <app-update [employee]="employee" user="admin" ></app-update>
+  <app-add-employee></app-add-employee>
+

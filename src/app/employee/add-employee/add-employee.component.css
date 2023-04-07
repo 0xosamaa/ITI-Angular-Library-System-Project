@@ -1,0 +1,44 @@
+.update{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.info-card{
+  display: flex;
+  width: 45%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.cont{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 80%;
+}
+.info-card h3{
+  color: #121256;
+  font-weight: bolder;
+}
+.info-card h4{
+  padding-left: 3px;
+  color: #999;
+  font-weight: bold;
+}
+hr {
+  height:3px;
+  border-width:0;
+  background-color:#eee;
+}
+label{
+  color: #121256;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.button{
+  width: 15%;
+  margin: auto !important;
+}
