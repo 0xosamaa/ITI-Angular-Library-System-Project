@@ -1,0 +1,37 @@
+<p-dialog  header="Employee Information" [(visible)]="visible" [modal]="true" [style]="{width: '80vw' , height: '75vh'}">
+  <div class="cont">
+    <div class="info-card">
+      <label>Id : </label>
+      <input pInputText readonly  placeholder="Id" [(ngModel)]="employee._id" />
+    </div>
+    <div class="info-card">
+      <label>First Name : </label>
+      <input pInputText   placeholder="First Name" [(ngModel)]="employee.firstName" />
+    </div>
+    <div class="info-card">
+      <label>HireDate : </label>
+      <p-calendar styleClass="p-calendar-w-btn" [(ngModel)]="hireDate"></p-calendar>
+    </div>
+    <div class="info-card">
+      <label>Last Name : </label>
+      <input pInputText   placeholder="Last Name" [(ngModel)]="employee.lastName" />
+    </div>
+    <div class="info-card">
+      <label>BirthDate : </label>
+      <p-calendar [(ngModel)]="birthDate"></p-calendar>
+    </div>
+    <div class="info-card">
+      <label>Email : </label>
+      <input pInputText   placeholder="Email" [(ngModel)]="employee.email" />
+    </div>
+    <div class="info-card">
+      <label>Salary : </label>
+      <input pInputText   placeholder="Salary" [(ngModel)]="employee.salary" />
+    </div>
+    <div class="info-card">
+      <label>settings : </label>
+      <p-dropdown [options]="settings" [(ngModel)]="setting" optionLabel="name"></p-dropdown>
+    </div>
+    <p-button class="button"   (click)="save()" styleClass="p-button-primary p-button-lg" label="Update"></p-button>
+  </div>
+</p-dialog>

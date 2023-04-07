@@ -1,0 +1,43 @@
+.info-card{
+  display: flex;
+  width: 45%;
+  align-items: center;
+}
+.cont{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: space-evenly;
+}
+.info-card h3{
+  color: #121256;
+  font-weight: bolder;
+}
+.info-card h4{
+  padding-left: 3px;
+  color: #999;
+  font-weight: bold;
+}
+hr {
+  height:3px;
+  border-width:0;
+  background-color:#eee;
+}
+.add-button{
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #121256;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+}
