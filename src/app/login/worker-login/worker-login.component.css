@@ -1,0 +1,16 @@
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly !important;
+  align-items: center;
+  margin: 0 auto;
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  height: 40vh;
+  transform: translate(0, 50%);
+}
+.login div{
+  margin-bottom: 20px;
+}
