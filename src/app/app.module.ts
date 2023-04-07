@@ -6,7 +6,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TestComponent } from './test/test/test.component';
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";  //HttpClientModule
 import { EmployeeListComponent } from './employee/emplyee-list/employee-list.component';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 import { TableModule } from 'primeng/table';
@@ -34,7 +34,7 @@ import {MessagesModule} from "primeng/messages";
     AppComponent,
     NavbarComponent,
     TestComponent,
-    LoginComponent
+    LoginComponent,
     EmployeeListComponent,
     UpdateComponent,
     AddEmployeeComponent,
