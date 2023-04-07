@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TestComponent } from './test/test/test.component';
+import {HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { EmployeeListComponent } from './employee/emplyee-list/employee-list.component';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
-
-
-
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import {FormsModule} from "@angular/forms";
@@ -36,6 +34,7 @@ import {MessagesModule} from "primeng/messages";
     AppComponent,
     NavbarComponent,
     TestComponent,
+    LoginComponent
     EmployeeListComponent,
     UpdateComponent,
     AddEmployeeComponent,

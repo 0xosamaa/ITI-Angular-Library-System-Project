@@ -1,0 +1,8 @@
+#library-logo {
+  filter: saturate(100%) brightness(100%);
+  transition: all 0.5s;
+}
+
+#library-logo:hover {
+  filter: saturate(0%) brightness(200%);
+}
