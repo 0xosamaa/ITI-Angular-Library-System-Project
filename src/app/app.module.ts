@@ -8,26 +8,27 @@ import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";  //HttpClientModule
 import { EmployeeListComponent } from './employee/emplyee-list/employee-list.component';
-import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {DropdownModule} from "primeng/dropdown";
-import {DialogModule} from "primeng/dialog";
-import {ButtonModule} from "primeng/button";
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 import { UpdateComponent } from './employee/update/update.component';
-import {CalendarModule} from "primeng/calendar";
-import {InputTextModule} from "primeng/inputtext";
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
-import {PasswordModule} from "primeng/password";
-import {ToastModule} from "primeng/toast";
-import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { WorkerLoginComponent } from './login/worker-login/worker-login.component';
 import { ProfileComponent } from './employee/profile/profile.component';
 import {DividerModule} from "primeng/divider";
 import {MessagesModule} from "primeng/messages";
-
+import { BookListComponent } from './book/book-list/book-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MessagesModule} from "primeng/messages";
     UpdateComponent,
     AddEmployeeComponent,
     WorkerLoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    BookListComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,10 +63,13 @@ import {MessagesModule} from "primeng/messages";
     MessagesModule
   ],
   providers: [
-    {provide: "baseURL", useValue: "http://localhost:8080"},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
-
+    { provide: 'baseURL', useValue: 'http://localhost:8080' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
