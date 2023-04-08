@@ -5,28 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TestComponent } from './test/test/test.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './employee/emplyee-list/employee-list.component';
-import {AuthInterceptorService} from "./services/auth-interceptor.service";
-
-
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {DropdownModule} from "primeng/dropdown";
-import {DialogModule} from "primeng/dialog";
-import {ButtonModule} from "primeng/button";
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 import { UpdateComponent } from './employee/update/update.component';
-import {CalendarModule} from "primeng/calendar";
-import {InputTextModule} from "primeng/inputtext";
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
-import {PasswordModule} from "primeng/password";
-import {ToastModule} from "primeng/toast";
-import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { WorkerLoginComponent } from './login/worker-login/worker-login.component';
-
+import { BookListComponent } from './book/book-list/book-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +34,8 @@ import { WorkerLoginComponent } from './login/worker-login/worker-login.componen
     EmployeeListComponent,
     UpdateComponent,
     AddEmployeeComponent,
-    WorkerLoginComponent
+    WorkerLoginComponent,
+    BookListComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,13 +52,16 @@ import { WorkerLoginComponent } from './login/worker-login/worker-login.componen
     InputTextModule,
     PasswordModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
   providers: [
-    {provide: "baseURL", useValue: "http://localhost:8080"},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
-
+    { provide: 'baseURL', useValue: 'http://localhost:8080' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

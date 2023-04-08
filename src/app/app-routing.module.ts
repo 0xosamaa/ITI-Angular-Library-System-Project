@@ -4,10 +4,12 @@ import {EmployeeListComponent} from "./employee/emplyee-list/employee-list.compo
 import {TestComponent} from "./test/test/test.component";
 import {WorkerLoginComponent} from "./login/worker-login/worker-login.component";
 import {AdminGuardGuard} from "./guards/admin-guard.guard";
+import { BookListComponent } from './book/book-list/book-list.component';
 
 const routes: Routes = [
   {path: 'workers/login',component:WorkerLoginComponent},
-  {path: 'employees',component:EmployeeListComponent, canActivate: [AdminGuardGuard]},
+  {path: 'employees',component:EmployeeListComponent,/* canActivate: [AdminGuardGuard]*/},
+  {path: 'books',component:BookListComponent/*, canActivate: [AdminGuardGuard]*/},
   { path: '', component: TestComponent},
 ];
 
