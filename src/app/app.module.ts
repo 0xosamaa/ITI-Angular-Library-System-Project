@@ -12,7 +12,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
@@ -29,6 +29,7 @@ import { ProfileComponent } from './employee/profile/profile.component';
 import {DividerModule} from "primeng/divider";
 import {MessagesModule} from "primeng/messages";
 import { BookListComponent } from './book/book-list/book-list.component';
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { BookListComponent } from './book/book-list/book-list.component';
     ToastModule,
     ConfirmDialogModule,
     DividerModule,
-    MessagesModule
+    MessagesModule,
+    FileUploadModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: 'baseURL', useValue: 'http://localhost:8080' },

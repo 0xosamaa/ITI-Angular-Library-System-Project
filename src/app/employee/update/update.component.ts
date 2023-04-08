@@ -1,12 +1,15 @@
 import {Component, Input} from '@angular/core';
 import {Employee} from "../../_models/employee";
 import {EmployeeService} from "../../services/employee.service";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: ['./update.component.css']
+  styleUrls: ['./update.component.css'],
+  providers: [MessageService]
 })
+
 export class UpdateComponent {
    @Input() employee:Employee;
    @Input() user:string;
@@ -16,7 +19,8 @@ export class UpdateComponent {
    birthDate: Date = new Date();
    hireDate: Date = new Date();
 
-  constructor(private empService:EmployeeService) {
+
+  constructor(private empService:EmployeeService,private messageService: MessageService) {
     this.employee = new Employee(
       "",
       "",
@@ -58,11 +62,15 @@ export class UpdateComponent {
   }
 
   save() {
-
     this.employee.birthDate = this.birthDate.toISOString();
     this.employee.hireDate = this.hireDate.toISOString();
     this.employee.settings = this.setting.code;
     console.log(this.employee);
+    // delete password from employee object
+    if(this.employee.password == ""){
+      this.employee.password = undefined;
+    }
+
     this.empService.updateEmployee(this.employee).subscribe(
       (data:any) => {
         if (this.user == "emp"){
@@ -79,6 +87,9 @@ export class UpdateComponent {
       }
   );
 }
+
+
+
 
 
 
