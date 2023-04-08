@@ -33,11 +33,11 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 22%">Title</th>
-        <th style="width: 22%">Author</th>
-        <th style="width: 22%">Publisher</th>
-        <th style="width: 22%">Category</th>
-        <th style="width: 12%">isAvailable</th>
+        <th pSortableColumn="title" style="width: 22%">Title <p-sortIcon field="title"></p-sortIcon></th>
+        <th pSortableColumn="author" style="width: 22%">Author <p-sortIcon field="author"></p-sortIcon></th>
+        <th pSortableColumn="publisher" style="width: 22%">Publisher <p-sortIcon field="publisher"></p-sortIcon></th>
+        <th pSortableColumn="category" style="width: 22%">Category <p-sortIcon field="category"></p-sortIcon></th>
+        <th pSortableColumn="isAvailable" style="width: 12%">Availability <p-sortIcon field="isAvailable"></p-sortIcon></th>
       </tr>
       <tr>
         <th>
