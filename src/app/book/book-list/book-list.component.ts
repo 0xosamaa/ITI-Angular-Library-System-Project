@@ -8,7 +8,8 @@ import { Book } from 'src/app/_models/book';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  styleUrls: ['./book-list.component.css'],
+  providers: [ConfirmationService, MessageService]
 })
 export class BookListComponent implements OnInit {
   loading: boolean = true;
