@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/button';
 import { UpdateComponent } from './employee/update/update.component';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
@@ -30,6 +32,8 @@ import {DividerModule} from "primeng/divider";
 import {MessagesModule} from "primeng/messages";
 import { BookListComponent } from './book/book-list/book-list.component';
 import {FileUploadModule} from "primeng/fileupload";
+import { AddBookComponent } from './book/add-book/add-book.component';
+import { UpdateBookComponent } from './book/update-book/update-book.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,8 @@ import {FileUploadModule} from "primeng/fileupload";
     WorkerLoginComponent,
     ProfileComponent,
     BookListComponent,
+    AddBookComponent,
+    UpdateBookComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +63,8 @@ import {FileUploadModule} from "primeng/fileupload";
     ButtonModule,
     CalendarModule,
     InputTextModule,
+    InputNumberModule,
+    CheckboxModule,
     PasswordModule,
     ToastModule,
     ConfirmDialogModule,

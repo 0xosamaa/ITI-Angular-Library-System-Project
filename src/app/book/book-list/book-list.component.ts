@@ -1,9 +1,11 @@
+import { UpdateBookComponent } from './../update-book/update-book.component';
 import { ConfirmEventType, MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { BookService } from './../../services/book.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Book } from 'src/app/_models/book';
+import { AddBookComponent } from "../add-book/add-book.component";
 
 @Component({
   selector: 'app-book-list',
@@ -12,8 +14,12 @@ import { Book } from 'src/app/_models/book';
   providers: [ConfirmationService, MessageService]
 })
 export class BookListComponent implements OnInit {
+  @ViewChild(UpdateBookComponent) child: UpdateBookComponent | undefined;
+  @ViewChild(AddBookComponent) addChild: AddBookComponent | undefined;
   loading: boolean = true;
   detailsVisible: boolean = false;
+  addVisible: boolean = false;
+  updateVisible: boolean = false;
   books: Book[] = [];
   book: Book = new Book();
 
@@ -25,6 +31,10 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
+    this.getBooks();
+  }
+
+  private getBooks(): void {
     this.bookService.getBooks().subscribe(
       (data:any) => {
         this.books = data.books;
@@ -51,6 +61,15 @@ export class BookListComponent implements OnInit {
     console.log(this.book);
   }
 
+  // updateDialog(book:Book) {
+  //   this.book = book;
+  //   this.child?.showUpdateDialog();
+  // }
+
+  addDialog() {
+    this.addChild?.showAddDialog();
+  }
+
   deleteDialog(_id: string) {
     this.confirmationService.confirm({
       message: 'Are you sure to delete book?',
@@ -74,8 +93,6 @@ export class BookListComponent implements OnInit {
             console.log(error.error.message);
           }
         );
-
-
       },
       reject: (type: any) => {
         switch (type) {
@@ -88,5 +105,6 @@ export class BookListComponent implements OnInit {
         }
       }
     });
+    this.getBooks();
   }
 }

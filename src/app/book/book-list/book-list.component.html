@@ -157,8 +157,11 @@
       </div>
     </div>
   </p-dialog>
-</div>
-<p-toast></p-toast>
+  <p-toast></p-toast>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+</div>
 
-  <p-button id="add-btn" label="+" styleClass="p-button-rounded"></p-button>
+  <p-button id="add-btn" (click)="addDialog()" label="+" styleClass="p-button-rounded"></p-button>
+
+
+<app-add-book></app-add-book>
