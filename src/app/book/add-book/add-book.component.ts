@@ -1,6 +1,7 @@
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
+
 import { BookService } from './../../services/book.service';
 import { Book } from './../../_models/book';
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-add-book',
@@ -21,14 +22,7 @@ export class AddBookComponent implements OnChanges {
 
   add() {
     this.book.dateAdded = new Date();
-    this.bookService.addBook(this.book).subscribe(
-      (data:any) => {
-        this.visible = false;
-        window.location.reload();
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    );
+    this.visible = false;
+    this.bookService.addBook(this.book);
   }
 }

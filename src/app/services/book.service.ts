@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from './../_models/book';
 
@@ -6,8 +6,7 @@ import { Book } from './../_models/book';
   providedIn: 'root',
 })
 export class BookService {
-  books: Book[] = [];
-  book: Book = new Book();
+  bookAdded: EventEmitter<Book> = new EventEmitter<Book>();
 
   constructor(
     public http: HttpClient,
@@ -27,7 +26,14 @@ export class BookService {
   }
 
   addBook(book: Book) {
-    return this.http.post(this.baseURL + '/books', book);
+    return this.http.post(this.baseURL + '/books', book).subscribe(
+      (data) => {
+        this.bookAdded.emit(book);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   updateBook(book: Book) {

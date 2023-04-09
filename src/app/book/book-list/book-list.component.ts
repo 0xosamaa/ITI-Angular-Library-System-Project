@@ -2,7 +2,7 @@ import { UpdateBookComponent } from './../update-book/update-book.component';
 import { ConfirmEventType, MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { BookService } from './../../services/book.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Book } from 'src/app/_models/book';
 import { AddBookComponent } from "../add-book/add-book.component";
@@ -13,7 +13,7 @@ import { AddBookComponent } from "../add-book/add-book.component";
   styleUrls: ['./book-list.component.css'],
   providers: [ConfirmationService, MessageService]
 })
-export class BookListComponent implements OnInit {
+export class BookListComponent implements OnInit, OnChanges {
   @ViewChild(UpdateBookComponent) child: UpdateBookComponent | undefined;
   @ViewChild(AddBookComponent) addChild: AddBookComponent | undefined;
   loading: boolean = true;
@@ -31,6 +31,13 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
+    this.getBooks();
+    this.bookService.bookAdded.subscribe((book: Book) => {
+      this.books.push(book);
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.getBooks();
   }
 
