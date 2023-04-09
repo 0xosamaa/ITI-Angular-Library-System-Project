@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   { path: '', component: TestComponent },
   {
-    path: 'administrator',
+    path: 'administrators',
     component: AdministratorComponent,
     // canActivate: [AdminGuardGuard],
   },

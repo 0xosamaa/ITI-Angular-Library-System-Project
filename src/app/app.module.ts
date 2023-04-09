@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http'; //HttpClientModule
 import { EmployeeListComponent } from './employee/emplyee-list/employee-list.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-
+import { ImageModule } from 'primeng/image';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { AddEmployeeComponent } from './employee/add-employee/add-employee.compo
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 import { WorkerLoginComponent } from './login/worker-login/worker-login.component';
 import { ProfileComponent } from './employee/profile/profile.component';
 import { DividerModule } from 'primeng/divider';
@@ -36,6 +37,7 @@ import { AdministratorDetailsComponent } from './administrator/administrator-det
 import { AdministratorListComponent } from './administrator/administrator-list/administrator-list.component';
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
+import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { AdministratorEditingComponent } from './administrator/administrator-edi
     AdministratorListComponent,
     AdministratorAddingComponent,
     AdministratorEditingComponent,
+    AdministratorReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { AdministratorEditingComponent } from './administrator/administrator-edi
     PasswordModule,
     ToastModule,
     ConfirmDialogModule,
+    ImageModule,
     DividerModule,
     MessagesModule,
     FileUploadModule,

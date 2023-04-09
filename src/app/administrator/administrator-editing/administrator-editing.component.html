@@ -1,49 +1,93 @@
-<div class="container my-5">
-  <div class="row my-3">
-    <div class="col-6">
-      <h2 class="text-primary">Editing Administrator</h2>
-    </div>
-    <div class="col-6 text-end">
-      <a href="#" class="btn btn-primary">
-        <i class="bi bi-arrow-return-left"></i> Return To Administrator List</a
-      >
-    </div>
-  </div>
+<p-dialog
+  header="Edit Administrator"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '75vw' }"
+>
   <div>
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" name="firstName" />
-    </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" name="firstName" />
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="administrator.firstName"
+        />
+      </div>
+      <div class="mb-3 col-6">
+        <label class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="administrator.lastName"
+        />
+      </div>
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" name="email" />
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="administrator.email"
+      />
     </div>
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" name="password" />
-    </div>
-    <div class="mb-3 w-25">
-      <label for="birthday" class="form-label">Birthday</label>
-      <input type="date" class="form-control" name="birthday" />
-    </div>
-    <div class="mb-3 w-25">
-      <label for="hireDate" class="form-label">Hire Date</label>
-      <input type="date" class="form-control" name="hireDate" />
+      <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="administrator.password"
+      />
+    </div> -->
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label for="template" class="col-12 my-2">Hire Date</label>
+        <p-calendar [(ngModel)]="hireDate">
+          <ng-template pTemplate="date" let-date>
+            <span
+              [ngStyle]="{
+                textDecoration:
+                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
+              }"
+              >{{ date.day }}</span
+            >
+          </ng-template>
+        </p-calendar>
+      </div>
+      <div class="mb-3 col-6">
+        <label for="template" class="col-12 my-2">Birthday</label>
+        <p-calendar [(ngModel)]="birthday">
+          <ng-template pTemplate="date" let-date>
+            <span
+              [ngStyle]="{
+                textDecoration:
+                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
+              }"
+              >{{ date.day }}</span
+            >
+          </ng-template>
+        </p-calendar>
+      </div>
     </div>
     <div class="mb-3">
       <label for="salary" class="form-label">Salary</label>
-      <input type="text" class="form-control" name="salary" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="administrator.salary"
+      />
     </div>
     <div class="mb-3">
-      <label for="formFile" class="form-label">Select Image :</label>
+      <label for="formFile" class="form-label">Upload Image : </label>
       <input class="form-control" type="file" accept="image/*" />
     </div>
-    <div class="my-5">
-      <button class="btn btn-primary px-5">Edit</button>
-    </div>
   </div>
-</div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (onClick)="editAdministrator()"
+      icon="pi pi-check"
+      label="Ok"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>

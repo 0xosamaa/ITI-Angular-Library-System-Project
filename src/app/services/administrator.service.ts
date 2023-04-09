@@ -19,8 +19,8 @@ export class AdministratorService {
     return this.http.get<Administrator[]>(this.baseURL + '/administrators');
   }
 
-  getAdministrator(email: string) {
-    return this.http.get(this.baseURL + '/administrators/' + email);
+  getAdministrator(id: string) {
+    return this.http.get(this.baseURL + '/administrators/' + id);
   }
 
   addAdministrator(admin: Administrator) {
@@ -28,10 +28,10 @@ export class AdministratorService {
   }
 
   updateAdministrator(admin: Administrator) {
-    return this.http.patch(this.baseURL + '/administrators/', admin);
+    return this.http.patch(this.baseURL + '/administrators', admin);
   }
 
-  deleteAdministrator(email: string) {
-    return this.http.delete(this.baseURL + '/administrators/' + email);
+  deleteAdministrator(id: string) {
+    return this.http.delete(this.baseURL + '/administrators/' + id);
   }
 }

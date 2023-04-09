@@ -18,7 +18,6 @@ export class AdministratorAddingComponent {
   }
 
   showAddDialog() {
-    console.log('heeeeeeeeeeeeeeeeeeeeeeeeey');
     this.visible = true;
   }
 
