@@ -37,4 +37,10 @@ export class BookListComponent implements OnInit {
     console.log(event.value);
     return event.value;
   }
+
+  showDialog(book: Book) {
+    this.detailsVisible = true;
+    this.book = book;
+    console.log(this.book);
+  }
 }

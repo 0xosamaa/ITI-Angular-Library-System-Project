@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'workers/login',component:WorkerLoginComponent},
   {path: 'employees',component:EmployeeListComponent, canActivate: [AdminGuardGuard]},
   {path: 'employee/profile',component:ProfileComponent, canActivate: [ProfileGuard]},
-  {path: 'books',component:BookListComponent/*, canActivate: [AdminGuardGuard]*/},
+  {path: 'books',component:BookListComponent, canActivate: [AdminGuardGuard]},
   { path: '', component: TestComponent},
 ];
 
