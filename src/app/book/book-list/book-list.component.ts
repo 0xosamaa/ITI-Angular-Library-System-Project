@@ -51,7 +51,6 @@ export class BookListComponent implements OnInit {
   }
 
   getEventValue(event: any) {
-    console.log(event.value);
     return event.value;
   }
 
@@ -81,7 +80,7 @@ export class BookListComponent implements OnInit {
             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Book deleted successfully' });
             this.bookService.getBooks().subscribe(
               (data:any) => {
-                this.books = data.data;
+                this.books = data.books;
                 console.log(this.books);
               },
               (error:any) => {

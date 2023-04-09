@@ -20,9 +20,6 @@ export class AddBookComponent implements OnChanges {
   }
 
   add() {
-    // this.employee.birthDate = this.birthDate.toISOString();
-    // this.employee.hireDate = this.hireDate.toISOString();
-    // this.employee.settings = this.setting.code;
     this.book.dateAdded = new Date();
     this.bookService.addBook(this.book).subscribe(
       (data:any) => {
