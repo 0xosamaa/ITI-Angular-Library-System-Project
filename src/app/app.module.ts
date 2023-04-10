@@ -38,7 +38,8 @@ import { AdministratorListComponent } from './administrator/administrator-list/a
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
-
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     AdministratorReportComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     InputMaskModule,
@@ -88,6 +90,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
       useClass: AuthInterceptorService,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

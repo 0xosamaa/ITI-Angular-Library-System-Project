@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Administrator } from 'src/app/_models/administrator';
 import { AdministratorService } from 'src/app/services/administrator.service';
 
@@ -7,7 +7,7 @@ import { AdministratorService } from 'src/app/services/administrator.service';
   templateUrl: './administrator-details.component.html',
   styleUrls: ['./administrator-details.component.css'],
 })
-export class AdministratorDetailsComponent implements OnInit {
+export class AdministratorDetailsComponent {
   administrator: Administrator;
 
   hireDate: Date = new Date();
@@ -18,12 +18,7 @@ export class AdministratorDetailsComponent implements OnInit {
   constructor(private adminService: AdministratorService) {
     this.administrator = new Administrator('', '', '', '', '', '', '', 0, '');
   }
-  ngOnInit(): void {
-    this.adminService.getAdministrator(this.adminId).subscribe((data: any) => {
-      this.administrator = data.data[0];
-      console.log(data.data);
-    });
-  }
+
   showDialogToggle(id: any) {
     this.adminId = id;
     this.adminService.getAdministrator(this.adminId).subscribe((data: any) => {
