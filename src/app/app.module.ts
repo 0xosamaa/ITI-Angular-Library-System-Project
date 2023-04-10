@@ -47,6 +47,7 @@ import { AdministratorListComponent } from './administrator/administrator-list/a
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
+import { BorrowsComponent } from './borrows/borrows.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
+    BorrowsComponent,
 
   ],
   imports: [

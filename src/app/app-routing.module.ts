@@ -9,9 +9,14 @@ import { EmpGuardGuard } from './guards/emp-guard.guard';
 import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BookListComponent } from './book/book-list/book-list.component';
+import { BorrowsComponent } from "./borrows/borrows.component";
 
 const routes: Routes = [
-  {path: 'books',component:BookListComponent, canActivate: [AdminGuardGuard]},
+  {
+    path: 'books',
+    component: BookListComponent,
+    canActivate: [AdminGuardGuard],
+  },
   { path: 'workers/login', component: WorkerLoginComponent },
   {
     path: 'employees',
@@ -27,6 +32,11 @@ const routes: Routes = [
   {
     path: 'administrators',
     component: AdministratorComponent,
+    // canActivate: [AdminGuardGuard],
+  },
+  {
+    path: 'borrows',
+    component: BorrowsComponent,
     // canActivate: [AdminGuardGuard],
   },
 ];
