@@ -87,7 +87,7 @@
           ></i>
         </td>
         <td class="d-flex justify-content-center">
-          <p-button (click)="showDialog(book)" icon="pi pi-external-link" class="m-2"></p-button>
+          <p-button (click)="showDialog(book._id)" icon="pi pi-external-link" class="m-2"></p-button>
           <p-button icon="pi pi-pencil" styleClass="p-button-success" class="m-2"></p-button>
           <p-button (click)="deleteDialog(book._id)" icon="pi pi-trash" styleClass="p-button-danger" class="m-2"></p-button>
         </td>
@@ -100,63 +100,6 @@
     </ng-template>
   </p-table>
 
-  <p-dialog header="Book Information" [(visible)]="detailsVisible" [modal]="true" [style]="{maxWidth: '600px', width: '100%', margin: '20px'}">
-    <div class="table-responsive">
-      <div class="table-responsive">
-        <table class="table
-        table-hover
-        table-border
-        align-middle">
-          <tbody>
-            <tr>
-              <th>Title</th>
-              <td>{{ book.title }}</td>
-            </tr>
-            <tr>
-              <th>Author</th>
-              <td>{{ book.author }}</td>
-            </tr>
-            <tr>
-              <th>Publisher</th>
-              <td>{{ book.publisher }}</td>
-            </tr>
-            <tr>
-              <th>Category</th>
-              <td>{{ book.category }}</td>
-            </tr>
-            <tr>
-              <th>Available</th>
-              <td>
-                <i
-                  class="pi"
-                  [ngClass]="{
-                    'text-success pi-check-circle': book.isAvailable,
-                    'text-danger pi-times-circle': !book.isAvailable
-                  }"
-                ></i>
-              </td>
-            </tr>
-            <tr>
-              <th>Pages</th>
-              <td>{{ book.pagesCount }}</td>
-            </tr>
-            <tr>
-              <th>Copies</th>
-              <td>{{ book.copiesCount }}</td>
-            </tr>
-            <tr>
-              <th>Publish Date</th>
-              <td>{{ book.datePublished | date }}</td>
-            </tr>
-            <tr>
-              <th>Added at</th>
-              <td>{{ book.dateAdded | date }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </p-dialog>
   <p-toast></p-toast>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 </div>
@@ -165,3 +108,5 @@
 
 
 <app-add-book></app-add-book>
+<app-delete-book></app-delete-book>
+<app-book-details></app-book-details>

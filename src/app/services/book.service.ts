@@ -6,7 +6,9 @@ import { Book } from './../_models/book';
   providedIn: 'root',
 })
 export class BookService {
+  book: Book = new Book();
   bookAdded: EventEmitter<Book> = new EventEmitter<Book>();
+  bookDetails: EventEmitter<Book> = new EventEmitter<Book>();
 
   constructor(
     public http: HttpClient,
@@ -18,7 +20,15 @@ export class BookService {
   }
 
   getBook(id: string) {
-    return this.http.get(this.baseURL + '/books/id/' + id);
+    this.http.get(this.baseURL + '/books/id/' + id).subscribe(
+      (data:any) => {
+        this.book = data.book;
+        this.bookDetails.emit(this.book);
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
   }
 
   searchBook(keyword: string) {

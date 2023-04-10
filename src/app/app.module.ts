@@ -34,6 +34,8 @@ import { BookListComponent } from './book/book-list/book-list.component';
 import {FileUploadModule} from "primeng/fileupload";
 import { AddBookComponent } from './book/add-book/add-book.component';
 import { UpdateBookComponent } from './book/update-book/update-book.component';
+import { DeleteBookComponent } from './book/delete-book/delete-book.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { UpdateBookComponent } from './book/update-book/update-book.component';
     BookListComponent,
     AddBookComponent,
     UpdateBookComponent,
+    DeleteBookComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,

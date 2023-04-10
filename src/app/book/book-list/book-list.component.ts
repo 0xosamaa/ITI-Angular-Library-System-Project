@@ -1,3 +1,4 @@
+import { BookDetailsComponent } from './../book-details/book-details.component';
 import { UpdateBookComponent } from './../update-book/update-book.component';
 import { ConfirmEventType, MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -16,6 +17,7 @@ import { AddBookComponent } from "../add-book/add-book.component";
 export class BookListComponent implements OnInit, OnChanges {
   @ViewChild(UpdateBookComponent) child: UpdateBookComponent | undefined;
   @ViewChild(AddBookComponent) addChild: AddBookComponent | undefined;
+  @ViewChild(BookDetailsComponent) bookDetails: BookDetailsComponent | undefined;
   loading: boolean = true;
   detailsVisible: boolean = false;
   addVisible: boolean = false;
@@ -45,7 +47,6 @@ export class BookListComponent implements OnInit, OnChanges {
     this.bookService.getBooks().subscribe(
       (data:any) => {
         this.books = data.books;
-        console.log(this.books);
       },
       (error) => {
         console.log(error.error.message);
@@ -61,10 +62,8 @@ export class BookListComponent implements OnInit, OnChanges {
     return event.value;
   }
 
-  showDialog(book: Book) {
-    this.detailsVisible = true;
-    this.book = book;
-    console.log(this.book);
+  showDialog(id: string) {
+    this.bookDetails?.showDetailsDialog(id);
   }
 
   // updateDialog(book:Book) {
@@ -88,7 +87,6 @@ export class BookListComponent implements OnInit, OnChanges {
             this.bookService.getBooks().subscribe(
               (data:any) => {
                 this.books = data.books;
-                console.log(this.books);
               },
               (error:any) => {
                 console.log(error.error.message);

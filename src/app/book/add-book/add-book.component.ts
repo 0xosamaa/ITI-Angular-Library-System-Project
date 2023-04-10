@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { BookService } from './../../services/book.service';
 import { Book } from './../../_models/book';
@@ -8,13 +8,11 @@ import { Book } from './../../_models/book';
   templateUrl: './add-book.component.html',
   styleUrls: ['./add-book.component.css']
 })
-export class AddBookComponent implements OnChanges {
+export class AddBookComponent {
   book: Book = new Book();
   visible: boolean = false;
 
   constructor(public bookService: BookService) {}
-
-  ngOnChanges(): void {}
 
   showAddDialog() {
     this.visible = true;
