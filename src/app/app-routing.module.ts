@@ -10,6 +10,7 @@ import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
 
 const routes: Routes = [
+  {path: 'books',component:BookListComponent, canActivate: [AdminGuardGuard]},
   { path: 'workers/login', component: WorkerLoginComponent },
   {
     path: 'employees',
