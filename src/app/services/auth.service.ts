@@ -9,6 +9,7 @@ export class AuthService {
   isLoggedIn = false;
   role: string;
   settings: string;
+  data: any;
 
   constructor(public http : HttpClient, @Inject("baseURL") public baseURL : string) {
     if (localStorage.getItem("token") != null) {
@@ -16,6 +17,7 @@ export class AuthService {
     }
     this.settings = localStorage.getItem("settings") || "";
     this.role = localStorage.getItem("role") || "";
+    this.data = JSON.parse(localStorage.getItem("data") || "{}");
 
   }
 
