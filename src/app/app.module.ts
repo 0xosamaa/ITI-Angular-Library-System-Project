@@ -37,7 +37,12 @@ import { AdministratorDetailsComponent } from './administrator/administrator-det
 import { AdministratorListComponent } from './administrator/administrator-list/administrator-list.component';
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
-import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
+//reports
+import { EmployeeReportsComponent } from './reports/employee-reports/employee-reports.component';
+import { BooksReportsComponent } from './reports/books-report/books-report.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MembersReportComponent } from './reports/members-report/members-report.component';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +61,9 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     AdministratorListComponent,
     AdministratorAddingComponent,
     AdministratorEditingComponent,
-    AdministratorReportComponent,
+    EmployeeReportsComponent,
+    BooksReportsComponent,
+    MembersReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,5 +97,8 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     },
   ],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {}

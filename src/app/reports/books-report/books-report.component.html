@@ -1,0 +1,22 @@
+<h1>Reading Books Reports</h1>
+
+<p-table [value]="reports">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Read Books</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-report>
+    <tr>
+      <td>{{ report.year }}</td>
+      <td>{{ report.month }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let book of report.readBooks">{{ book.title }}</li>
+        </ul>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

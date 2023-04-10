@@ -8,6 +8,10 @@ import { ProfileComponent } from './employee/profile/profile.component';
 import { EmpGuardGuard } from './guards/emp-guard.guard';
 import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
+import { EmployeeReportsComponent } from './reports/employee-reports/employee-reports.component';
+import { BooksReportsComponent } from './reports/books-report/books-report.component';
+import { MembersReportComponent } from './reports/members-report/members-report.component';
+
 
 const routes: Routes = [
   { path: 'workers/login', component: WorkerLoginComponent },
@@ -27,6 +31,15 @@ const routes: Routes = [
     component: AdministratorComponent,
     // canActivate: [AdminGuardGuard],
   },
+  { path: 'employee/report', component: EmployeeReportsComponent
+  ,canActivate: [AdminGuardGuard]
+},
+{ path: 'books/report', component: BooksReportsComponent
+,canActivate: [AdminGuardGuard]
+},
+{ path: 'members/report', component: MembersReportComponent
+,canActivate: [AdminGuardGuard]
+}
 ];
 
 @NgModule({

@@ -1,0 +1,22 @@
+<p-table [value]="employeeReports">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Month</th>
+      <th>Year</th>
+      <th>New Employees</th>
+      <th>Total Employees</th>
+      <th>Employees on Leave</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-employeeReport>
+    <tr>
+      <td>{{ employeeReport.month }}</td>
+      <td>{{ employeeReport.year }}</td>
+      <td>{{ employeeReport.newEmp }}</td>
+      <td>{{ employeeReport.numEmp }}</td>
+      <td>{{ employeeReport.numEmpLeave }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- <a routerLink="/reports">View Employee Reports</a> -->
