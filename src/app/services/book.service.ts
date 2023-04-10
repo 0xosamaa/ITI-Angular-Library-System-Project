@@ -9,6 +9,7 @@ export class BookService {
   book: Book = new Book();
   bookAdded: EventEmitter<Book> = new EventEmitter<Book>();
   bookDetails: EventEmitter<Book> = new EventEmitter<Book>();
+  showDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     public http: HttpClient,
@@ -24,6 +25,7 @@ export class BookService {
       (data:any) => {
         this.book = data.book;
         this.bookDetails.emit(this.book);
+        this.showDetails.emit(true);
       },
       (error:any) => {
         console.log(error);

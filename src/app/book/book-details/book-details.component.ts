@@ -17,9 +17,12 @@ export class BookDetailsComponent implements OnInit {
     this.bookService.bookDetails.subscribe((book: Book) => {
       this.book = book;
     });
+    this.bookService.showDetails.subscribe((visible: boolean) => {
+      this.visible = visible;
+    })
   }
   showDetailsDialog(id: string) {
+    this.book = new Book();
     this.bookService.getBook(id);
-    this.visible = true;
   }
 }
