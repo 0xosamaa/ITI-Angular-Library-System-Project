@@ -30,12 +30,13 @@
     </div>
     <div *ngIf="user === 'emp'"  class="info-card">
       <label>Password : </label>
-      <p-password  placeholder="Password" [(ngModel)]="employee.password" />
+      <p-password   placeholder="Password" [(ngModel)]="employee.password" />
     </div>
     <div *ngIf="user === 'admin'" class="info-card">
       <label>settings : </label>
       <p-dropdown [options]="settings" [(ngModel)]="setting" optionLabel="name"></p-dropdown>
     </div>
+
     <p-button class="button"   (click)="save()" styleClass="p-button-primary p-button-lg" label="Update"></p-button>
   </div>
 </p-dialog>

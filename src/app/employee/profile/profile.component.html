@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div class="img">
-    <img src="https://www.w3schools.com/w3images/paris.jpg" alt="Paris" style="width:100%;">
+    <img src="http://localhost:8080/images/Employee/{{userData.image}}" alt="Paris" style="width:100%;">
   </div>
 
     <p-messages *ngIf="userData.settings == 'default'" [(value)]="message" [enableService]="false" [closable]="false"></p-messages>
@@ -44,8 +44,28 @@
   </div>
   <p-button (click)="logout()" label="LogOut" styleClass="p-button-outlined p-button-danger"></p-button>
   <p-button (click)="updateProfile()" label="Update Profile" styleClass="p-button-outlined p-button-success"></p-button>
+  <p-button (click)="updateImage()" label="Change Image" styleClass="p-button-outlined p-button-primary"></p-button>
 
   <app-update [employee]="userData" user="emp" ></app-update>
 
 
 </div>
+
+<p-dialog  header="Employee Information" [(visible)]="visible" [modal]="true" [style]="{width: '60vw' , height: '50vh'}">
+  <form [formGroup]="myForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="file">File</label>
+      <input
+        formControlName="file"
+        id="file"
+        type="file"
+        class="form-control"
+        (change)="onFileChange($event)">
+      <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit">Submit</button>
+  </form>
+</p-dialog>
