@@ -1,0 +1,93 @@
+<p-dialog
+  header="Administrator Details"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '75vw' }"
+>
+  <div>
+    <div class="row">
+      <div class="mb-3 col-12">
+        <p-image
+          src="https://source.unsplash.com/featured/150x150"
+          alt="Image"
+          width="250"
+        >
+          <ng-template pTemplate="indicator"> Indicator Content </ng-template>
+        </p-image>
+      </div>
+      <div class="mb-3 col-6">
+        <label class="form-label">First Name</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          [(ngModel)]="administrator.firstName"
+        />
+      </div>
+      <div class="mb-3 col-6">
+        <label class="form-label">Last Name</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          [(ngModel)]="administrator.lastName"
+        />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        disabled
+        class="form-control"
+        [(ngModel)]="administrator.email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        disabled
+        class="form-control"
+        [(ngModel)]="administrator.password"
+      />
+    </div>
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label class="form-label">Hire Date</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          [(ngModel)]="administrator.hireDate"
+        />
+      </div>
+      <div class="mb-3 col-6">
+        <label class="form-label">Birthday</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          [(ngModel)]="administrator.birthday"
+        />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="salary" class="form-label">Salary</label>
+      <input
+        type="text"
+        disabled
+        class="form-control"
+        [(ngModel)]="administrator.salary"
+      />
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (onClick)="detailsDialogToggle()"
+      icon="pi pi-check"
+      label="Ok"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>

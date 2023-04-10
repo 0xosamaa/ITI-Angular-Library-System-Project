@@ -23,11 +23,18 @@ export class WorkerLoginComponent {
     if (this.setting.code == 'admin') {
       this.authService.loginAdmin(this.worker).subscribe(
         (data:any) => {
+          console.log(data);
           this.authService.isLoggedIn = true;
-          this.authService.role = "admin";
+          if (data.data.email == "BasicAdmin@Library.Co"){
+            this.authService.role = "basicAdmin";
+            localStorage.setItem("role", "basicAdmin");
+          }
+          else {
+            this.authService.role = "admin";
+            localStorage.setItem("role", "admin");
+          }
           this.authService.settings = data.data.settings || "manual";
           localStorage.setItem("token", data.token);
-          localStorage.setItem("role", "admin");
           localStorage.setItem("settings", data.data.settings || "manual");
           localStorage.setItem("data", JSON.stringify(data.data));
         }
