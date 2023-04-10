@@ -8,8 +8,10 @@ import { ProfileComponent } from './employee/profile/profile.component';
 import { EmpGuardGuard } from './guards/emp-guard.guard';
 import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
+import { BookListComponent } from './book/book-list/book-list.component';
 
 const routes: Routes = [
+  {path: 'books',component:BookListComponent, canActivate: [AdminGuardGuard]},
   { path: 'workers/login', component: WorkerLoginComponent },
   {
     path: 'employees',

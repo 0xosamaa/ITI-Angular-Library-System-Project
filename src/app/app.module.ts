@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/button';
 import { UpdateComponent } from './employee/update/update.component';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
@@ -31,6 +33,12 @@ import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
 import { InputMaskModule } from 'primeng/inputmask';
 import { BookListComponent } from './book/book-list/book-list.component';
+
+import { AddBookComponent } from './book/add-book/add-book.component';
+import { UpdateBookComponent } from './book/update-book/update-book.component';
+import { DeleteBookComponent } from './book/delete-book/delete-book.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
+
 import { FileUploadModule } from 'primeng/fileupload';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdministratorDetailsComponent } from './administrator/administrator-details/administrator-details.component';
@@ -40,6 +48,8 @@ import { AdministratorEditingComponent } from './administrator/administrator-edi
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { SideBarComponent } from './layout/side-bar/side-bar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,12 +62,19 @@ import { DatePipe } from '@angular/common';
     WorkerLoginComponent,
     ProfileComponent,
     BookListComponent,
+
+    AddBookComponent,
+    UpdateBookComponent,
+    DeleteBookComponent,
+    BookDetailsComponent,
+
     AdministratorComponent,
     AdministratorDetailsComponent,
     AdministratorListComponent,
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
+    SideBarComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +91,8 @@ import { DatePipe } from '@angular/common';
     ButtonModule,
     CalendarModule,
     InputTextModule,
+    InputNumberModule,
+    CheckboxModule,
     PasswordModule,
     ToastModule,
     ConfirmDialogModule,

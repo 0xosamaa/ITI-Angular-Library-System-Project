@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {LoginUser} from "../../_models/login-user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-worker-login',
@@ -12,7 +13,7 @@ export class WorkerLoginComponent {
   setting: any;
   worker:LoginUser = new LoginUser("","");
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,private router:Router) {
     this.settings = [
       {name: 'Admin', code: 'admin'},
       {name: 'Employee', code: 'employee'},
@@ -37,6 +38,7 @@ export class WorkerLoginComponent {
           localStorage.setItem("token", data.token);
           localStorage.setItem("settings", data.data.settings || "manual");
           localStorage.setItem("data", JSON.stringify(data.data));
+          this.authService.data = data.data;
         }
       )
     } else if (this.setting.code == 'employee') {
@@ -49,6 +51,8 @@ export class WorkerLoginComponent {
           localStorage.setItem("role", "employee");
           localStorage.setItem("settings", data.data.settings || "manual");
           localStorage.setItem("data", JSON.stringify(data.data));
+          this.authService.data = data.data;
+          this.router.navigateByUrl("/employee/profile");
         }
       )
     }
