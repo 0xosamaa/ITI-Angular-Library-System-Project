@@ -13,4 +13,12 @@ export class SideBarComponent {
         console.log("ngOnChanges");
     }
 
+  logout() {
+    localStorage.removeItem('data');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('settings');
+    window.location.href = "/home";
+  }
+
 }

@@ -15,14 +15,6 @@ export class TestComponent implements OnInit{
   constructor(public authService : AuthService , public router : Router) { }
 
   ngOnInit() {
-    this.authService.loginAdmin(this.user).subscribe(
-      (data) => {
-        console.log((<any>data)["token"]);
-        this.authService.isLoggedIn = true;
-        this.authService.role = "admin";
-        //localStorage.setItem("token", (<any>data)["token"]);
-      },
-    );
   }
 
 
