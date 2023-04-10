@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/button';
 import { UpdateComponent } from './employee/update/update.component';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
@@ -31,6 +33,13 @@ import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
 import { InputMaskModule } from 'primeng/inputmask';
 import { BookListComponent } from './book/book-list/book-list.component';
+
+
+import { AddBookComponent } from './book/add-book/add-book.component';
+import { UpdateBookComponent } from './book/update-book/update-book.component';
+import { DeleteBookComponent } from './book/delete-book/delete-book.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
+
 import { FileUploadModule } from 'primeng/fileupload';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdministratorDetailsComponent } from './administrator/administrator-details/administrator-details.component';
@@ -38,6 +47,7 @@ import { AdministratorListComponent } from './administrator/administrator-list/a
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
+
 
 @NgModule({
   declarations: [
@@ -51,12 +61,19 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     WorkerLoginComponent,
     ProfileComponent,
     BookListComponent,
+
+    AddBookComponent,
+    UpdateBookComponent,
+    DeleteBookComponent,
+    BookDetailsComponent,
+
     AdministratorComponent,
     AdministratorDetailsComponent,
     AdministratorListComponent,
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -72,6 +89,8 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     ButtonModule,
     CalendarModule,
     InputTextModule,
+    InputNumberModule,
+    CheckboxModule,
     PasswordModule,
     ToastModule,
     ConfirmDialogModule,
