@@ -21,6 +21,19 @@ export class AddBookComponent {
   add() {
     this.book.dateAdded = new Date();
     this.visible = false;
-    this.bookService.addBook(this.book);
+    this.bookService.addBook(new Book(
+      this.book.id,
+      this.book.title,
+      this.book.author,
+      this.book.publisher,
+      this.book.dateAdded,
+      this.book.datePublished,
+      this.book.category,
+      this.book.pagesCount,
+      this.book.copiesCount,
+      this.book.isAvailable,
+      this.book.shelfNo
+    ));
+    this.book = new Book();
   }
 }
