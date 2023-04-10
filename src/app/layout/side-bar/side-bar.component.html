@@ -8,7 +8,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.html" class="nav-link">Home</a>
+      <a href="/home" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>
@@ -154,10 +154,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{{authService.data.image? ('http://localhost:8080/images/Employee/'+authService.data.image) : 'assets/dragon.png'}} " class="img-circle elevation-2" alt="User Image">
+        <img src="{{authService.data.image? authService.role === 'admin' ? ('http://localhost:8080/images/Administrator/'+authService.data.image):('http://localhost:8080/images/Employee/'+authService.data.image) : 'assets/dragon.png'}} " class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{ authService.data.firstName+" "+authService.data.lastName || "Guest" }}</a>
+        <a href="#" class="d-block">{{authService.isLoggedIn? authService.data.firstName+" "+authService.data.lastName : "Guest" }}</a>
       </div>
     </div>
 
@@ -187,11 +187,20 @@
             </p>
           </a>
         </li>
+        <li (click)="logout()" *ngIf="authService.isLoggedIn" class="nav-item">
+          <a href="" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Logout
+              <!--<span class="right badge badge-danger">New</span>-->
+            </p>
+          </a>
+        </li>
 
         <!-- BasicAdmin Section -->
-        <li class="nav-header">Basic Admin</li>
+        <li *ngIf="authService.isLoggedIn && authService.role === 'basicAdmin'" class="nav-header">Basic Admin</li>
 
-        <li class="nav-item">
+        <li *ngIf="authService.isLoggedIn && authService.role === 'basicAdmin'" class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-lock"></i>
             <p>
@@ -226,8 +235,8 @@
 
         <!-- Admin Section -->
 
-        <li class="nav-header">Admin</li>
-        <li class="nav-item">
+        <li *ngIf="authService.isLoggedIn && authService.role === 'admin'" class="nav-header">Admin</li>
+        <li *ngIf="authService.isLoggedIn && authService.role === 'admin'" class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-lock-open"></i>
             <p>
@@ -249,8 +258,8 @@
         <!-- End Admin Section -->
 
         <!-- Workers Section -->
-        <li class="nav-header">Employees</li>
-        <li class="nav-item">
+        <li *ngIf="authService.isLoggedIn && authService.role === 'employee'" class="nav-header">Employees</li>
+        <li *ngIf="authService.isLoggedIn && authService.role === 'employee'" class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-laptop"></i>
             <p>
@@ -274,10 +283,6 @@
 
           </ul>
         </li>
-
-
-        <li class="nav-header">EXAMPLES</li>
-
 
       </ul>
     </nav>
