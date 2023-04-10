@@ -8,8 +8,10 @@ import { Book } from './../_models/book';
 export class BookService {
   book: Book = new Book();
   bookAdded: EventEmitter<Book> = new EventEmitter<Book>();
+  bookUpdated: EventEmitter<Book> = new EventEmitter<Book>();
   bookDetails: EventEmitter<Book> = new EventEmitter<Book>();
   showDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
+  showUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     public http: HttpClient,
@@ -33,6 +35,19 @@ export class BookService {
     );
   }
 
+  showDialogUpdate(id: string) {
+    this.http.get(this.baseURL + '/books/id/' + id).subscribe(
+      (data:any) => {
+        this.book = data.book;
+        this.bookUpdated.emit(this.book);
+        this.showUpdate.emit(true);
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  }
+
   searchBook(keyword: string) {
     return this.http.get(this.baseURL + '/books/search/' + keyword);
   }
@@ -48,8 +63,16 @@ export class BookService {
     );
   }
 
-  updateBook(book: Book) {
-    return this.http.patch(this.baseURL + '/books/id/' + book.id, book);
+  updateBook(id: string, book: Book) {
+    console.log(book);
+    return this.http.patch(this.baseURL + '/books/id/' + id, book).subscribe(
+      (data) => {
+        this.bookUpdated.emit(book);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   deleteBook(id: string) {

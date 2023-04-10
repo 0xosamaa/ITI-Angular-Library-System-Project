@@ -21,6 +21,7 @@ export class BookDetailsComponent implements OnInit {
       this.visible = visible;
     })
   }
+  
   showDetailsDialog(id: string) {
     this.book = new Book();
     this.bookService.getBook(id);
