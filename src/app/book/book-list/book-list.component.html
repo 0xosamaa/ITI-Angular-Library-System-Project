@@ -88,8 +88,8 @@
         </td>
         <td class="d-flex justify-content-center">
           <p-button (click)="showDialog(book._id)" icon="pi pi-external-link" class="m-2"></p-button>
-          <p-button *ngIf="authService.isLoggedIn && (authService.role === 'admin' || authService.role === 'employee')" (click)="updateDialog(book._id)" icon="pi pi-pencil" styleClass="p-button-success" class="m-2"></p-button>
-          <p-button *ngIf="authService.isLoggedIn && (authService.role === 'admin' || authService.role === 'employee')" (click)="deleteDialog(book._id)" icon="pi pi-trash" styleClass="p-button-danger" class="m-2"></p-button>
+          <p-button *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="updateDialog(book._id)" icon="pi pi-pencil" styleClass="p-button-success" class="m-2"></p-button>
+          <p-button *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="deleteDialog(book._id)" icon="pi pi-trash" styleClass="p-button-danger" class="m-2"></p-button>
         </td>
       </tr>
     </ng-template>
@@ -104,7 +104,7 @@
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 </div>
 
-  <p-button id="add-btn" (click)="addDialog()" label="+" styleClass="p-button-rounded"></p-button>
+  <p-button id="add-btn" *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="addDialog()" label="+" styleClass="p-button-rounded"></p-button>
 
 
 <app-book-details></app-book-details>
