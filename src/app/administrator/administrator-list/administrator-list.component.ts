@@ -23,6 +23,7 @@ import {
 })
 export class AdministratorListComponent implements OnInit, OnChanges {
   administratorList: Administrator[] = [];
+  wantedAdmin: Administrator | null = null;
 
   @ViewChild(AdministratorAddingComponent)
   addChild: AdministratorAddingComponent | undefined;
@@ -36,17 +37,6 @@ export class AdministratorListComponent implements OnInit, OnChanges {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    this.adminService.getAllAdministrators().subscribe(
-      (data: any) => {
-        this.administratorList = data.data;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
-
   ngOnInit() {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
@@ -57,15 +47,31 @@ export class AdministratorListComponent implements OnInit, OnChanges {
       }
     );
   }
-  displaydetailsModal(id: any) {
-    this.viewChild?.showDialogToggle(id);
+  ngOnChanges(): void {
+    this.adminService.getAllAdministrators().subscribe(
+      (data: any) => {
+        this.administratorList = data.data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  displaydetailsModal(id: number) {
+    this.wantedAdmin = this.administratorList[id];
+    this.viewChild?.showDetails();
+  }
+  displayEditModal(id: number) {
+    this.wantedAdmin = this.administratorList[id];
+    this.addChild?.showAddDialog();
   }
   displayAddModel() {
     this.addChild?.showAddDialog();
   }
-  displayEditModal(id: any) {
-    this.editChild?.showEditgToggle(id);
-  }
+  // displayEditModal(id: any) {
+  //   this.editChild?.showEditgToggle(id);
+  // }
   confirm(id: any) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',

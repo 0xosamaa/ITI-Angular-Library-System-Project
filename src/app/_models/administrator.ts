@@ -1,5 +1,5 @@
 export class Administrator {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -20,7 +20,7 @@ export class Administrator {
     _salary: number,
     _image: string
   ) {
-    this.id = _id;
+    this._id = _id;
     this.firstName = _firstName;
     this.lastName = _lastName;
     this.email = _email;

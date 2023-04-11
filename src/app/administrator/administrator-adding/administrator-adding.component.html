@@ -1,93 +1,72 @@
-<p-dialog
-  header="New Administrator"
-  [(visible)]="visible"
-  [modal]="true"
-  [style]="{ width: '75vw' }"
->
-  <div>
-    <div class="row">
-      <div class="mb-3 col-6">
-        <label class="form-label">First Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="administrator.firstName"
-        />
+<form [formGroup]="addFormGroup">
+  <p-dialog
+    header="New Administrator"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '75vw' }"
+  >
+    <div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" formControlName="firstName" />
+        </div>
+        <div class="mb-3 col-6">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName" />
+        </div>
       </div>
-      <div class="mb-3 col-6">
-        <label class="form-label">Last Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="administrator.lastName"
-        />
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" />
+        </div>
+        <div class="mb-3 col-6">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        [(ngModel)]="administrator.email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        [(ngModel)]="administrator.password"
-      />
-    </div>
-    <div class="row">
-      <div class="mb-3 col-6">
-        <label for="template" class="col-12 my-2">Hire Date</label>
-        <p-calendar [(ngModel)]="hireDate">
-          <ng-template pTemplate="date" let-date>
-            <span
-              [ngStyle]="{
-                textDecoration:
-                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
-              }"
-              >{{ date.day }}</span
-            >
-          </ng-template>
-        </p-calendar>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Hire Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="hireDate"
+            appendTo="body"
+          ></p-calendar>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Birthday</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="birthday"
+            appendTo="body"
+          ></p-calendar>
+        </div>
       </div>
-      <div class="mb-3 col-6">
-        <label for="template" class="col-12 my-2">Birthday</label>
-        <p-calendar [(ngModel)]="birthday">
-          <ng-template pTemplate="date" let-date>
-            <span
-              [ngStyle]="{
-                textDecoration:
-                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
-              }"
-              >{{ date.day }}</span
-            >
-          </ng-template>
-        </p-calendar>
+      <div class="mb-3">
+        <label for="salary" class="form-label">Salary</label>
+        <input type="text" class="form-control" formControlName="salary" />
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Upload Image : </label>
+        <input class="form-control" type="file" accept="image/*" />
       </div>
     </div>
-    <div class="mb-3">
-      <label for="salary" class="form-label">Salary</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="administrator.salary"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Upload Image : </label>
-      <input class="form-control" type="file" accept="image/*" />
-    </div>
-  </div>
-  <ng-template pTemplate="footer">
-    <p-button
-      (onClick)="addAdministrator()"
-      icon="pi pi-check"
-      label="Ok"
-      styleClass="p-button-text"
-    ></p-button>
-  </ng-template>
-</p-dialog>
+    <ng-template pTemplate="footer">
+      <p-button
+        [disabled]="addFormGroup.invalid"
+        (onClick)="addAdministrator()"
+        icon="pi pi-check"
+        label="Add"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>

@@ -34,7 +34,6 @@ import { MessagesModule } from 'primeng/messages';
 import { InputMaskModule } from 'primeng/inputmask';
 import { BookListComponent } from './book/book-list/book-list.component';
 
-
 import { AddBookComponent } from './book/add-book/add-book.component';
 import { UpdateBookComponent } from './book/update-book/update-book.component';
 import { DeleteBookComponent } from './book/delete-book/delete-book.component';
@@ -47,8 +46,10 @@ import { AdministratorListComponent } from './administrator/administrator-list/a
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
-
+import { BorrowsComponent } from './borrows/borrows.component';
 
 @NgModule({
   declarations: [
@@ -74,10 +75,12 @@ import { SideBarComponent } from './layout/side-bar/side-bar.component';
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
-    SideBarComponent,
 
+    SideBarComponent,
+    BorrowsComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     InputMaskModule,
@@ -109,6 +112,7 @@ import { SideBarComponent } from './layout/side-bar/side-bar.component';
       useClass: AuthInterceptorService,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

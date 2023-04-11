@@ -5,42 +5,42 @@
   [style]="{maxWidth: '600px', width: '100%', margin: '20px'}"
 >
   <div class="cont">
-    <div class="d-flex justify-content-start align-items-center mt-3">
-      <div class="d-flex flex-column gap-1 mx-3">
+    <div class="d-flex justify-content-around align-items-center mt-3">
+      <div class="d-flex flex-column">
         <label htmlFor="title">Title</label>
         <input class="input" pInputText id="title" [(ngModel)]="book.title" />
       </div>
-      <div class="d-flex flex-column gap-1 mx-3">
+      <div class="d-flex flex-column">
         <label htmlFor="author">Author</label>
         <input class="input" pInputText id="author" [(ngModel)]="book.author" />
       </div>
     </div>
-    <div class="d-flex justify-content-start align-items-center mt-3">
-      <div class="d-flex flex-column gap-1 mx-3">
+    <div class="d-flex justify-content-around align-items-center mt-3">
+      <div class="d-flex flex-column">
         <label htmlFor="publisher">Publisher</label>
         <input class="input" pInputText id="publisher" [(ngModel)]="book.publisher" />
       </div>
-      <div class="d-flex flex-column gap-1 mx-3">
+      <div class="d-flex flex-column">
         <label htmlFor="category">Category</label>
         <input class="input" pInputText id="category" [(ngModel)]="book.category" />
       </div>
     </div>
-    <div class="d-flex justify-content-start align-items-center mt-3">
-      <div class="d-flex flex-column gap-1 mx-3">
+    <div class="d-flex justify-content-around align-items-center mt-3">
+      <div class="d-flex flex-column">
         <label for="pages-count">No. of pages</label>
         <p-inputNumber styleClass="input-styling" [(ngModel)]="book.pagesCount" inputId="pages-count" mode="decimal" [min]="1" [max]="1800"></p-inputNumber>
       </div>
-      <div class="d-flex flex-column gap-1 mx-3">
+      <div class="d-flex flex-column">
         <label for="copies-count">No. of copies</label>
         <p-inputNumber styleClass="input-styling" [(ngModel)]="book.copiesCount" inputId="copies-count" mode="decimal" [min]="1" [max]="100"></p-inputNumber>
       </div>
     </div>
-    <div class="d-flex justify-content-start align-items-center mt-3">
-      <div class="d-flex flex-column gap-1 mx-3">
+    <div class="d-flex justify-content-around align-items-center mt-3">
+      <div class="d-flex flex-column">
         <label for="publish-date">Publish date</label>
         <p-calendar styleClass="input-styling" [touchUI]="true" [(ngModel)]="book.datePublished" appendTo="body"></p-calendar>
       </div>
-      <div class="d-flex flex-column gap-1 mx-3">
+      <div class="d-flex flex-column">
         <label for="shelf-no">Shelf No.</label>
         <p-inputNumber styleClass="input-styling" [(ngModel)]="book.shelfNo" inputId="shelf-no" mode="decimal" [min]="1" [max]="100"></p-inputNumber>
       </div>

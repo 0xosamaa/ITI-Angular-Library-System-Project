@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Administrator } from 'src/app/_models/administrator';
 import { AdministratorService } from 'src/app/services/administrator.service';
 
@@ -8,13 +9,24 @@ import { AdministratorService } from 'src/app/services/administrator.service';
   styleUrls: ['./administrator-adding.component.css'],
 })
 export class AdministratorAddingComponent {
+  addFormGroup: FormGroup;
   administrator: Administrator;
-  hireDate: Date = new Date();
-  birthday: Date = new Date();
   visible: boolean = false;
 
-  constructor(private adminService: AdministratorService) {
+  constructor(
+    private adminService: AdministratorService,
+    private formBuilder: FormBuilder
+  ) {
     this.administrator = new Administrator('', '', '', '', '', '', '', 0, '');
+    this.addFormGroup = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(9)]],
+      salary: ['', [Validators.required]],
+      birthday: ['', [Validators.required]],
+      hireDate: ['', [Validators.required]],
+    });
   }
 
   showAddDialog() {
@@ -22,13 +34,10 @@ export class AdministratorAddingComponent {
   }
 
   addAdministrator() {
-    this.administrator.hireDate = this.hireDate.toISOString();
-    this.administrator.birthday = this.birthday.toISOString();
-
+    this.administrator = this.addFormGroup.value;
     this.adminService.addAdministrator(this.administrator).subscribe(
       (data) => {
-        console.log(data);
-        this.visible = false;
+        this.showAddDialog();
       },
       (error) => {
         console.log(error);
