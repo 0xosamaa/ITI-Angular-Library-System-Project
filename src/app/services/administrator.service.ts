@@ -24,11 +24,15 @@ export class AdministratorService {
   }
 
   addAdministrator(admin: Administrator) {
-    return this.http.post(this.baseURL + '/administrators/', admin);
+    return this.http.post(this.baseURL + '/administrators', admin);
   }
 
   updateAdministrator(admin: Administrator) {
-    return this.http.patch(this.baseURL + '/administrators', admin);
+    console.log(admin);
+    return this.http.patch(
+      this.baseURL + '/administrators/' + admin._id,
+      admin
+    );
   }
 
   deleteAdministrator(id: string) {

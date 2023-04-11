@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { BookDetailsComponent } from './../book-details/book-details.component';
 import { UpdateBookComponent } from './../update-book/update-book.component';
 import { ConfirmEventType, MessageService } from 'primeng/api';
@@ -15,20 +16,18 @@ import { AddBookComponent } from "../add-book/add-book.component";
   providers: [ConfirmationService, MessageService]
 })
 export class BookListComponent implements OnInit, OnChanges {
-  @ViewChild(UpdateBookComponent) child: UpdateBookComponent | undefined;
-  @ViewChild(AddBookComponent) addChild: AddBookComponent | undefined;
+  @ViewChild(UpdateBookComponent) updateBook: UpdateBookComponent | undefined;
+  @ViewChild(AddBookComponent) addBook: AddBookComponent | undefined;
   @ViewChild(BookDetailsComponent) bookDetails: BookDetailsComponent | undefined;
   loading: boolean = true;
-  detailsVisible: boolean = false;
-  addVisible: boolean = false;
-  updateVisible: boolean = false;
   books: Book[] = [];
   book: Book = new Book();
 
   constructor(
     public bookService: BookService,
     public confirmationService: ConfirmationService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +39,14 @@ export class BookListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getBooks();
+    this.bookService.bookUpdated.subscribe((book: Book) => {
+      for (let i = 0; i < this.books.length; i++) {
+        if (this.books[i].id === book.id) {
+          this.books[i] = book;
+          break;
+        }
+      }
+    });
   }
 
   private getBooks(): void {
@@ -66,13 +72,12 @@ export class BookListComponent implements OnInit, OnChanges {
     this.bookDetails?.showDetailsDialog(id);
   }
 
-  // updateDialog(book:Book) {
-  //   this.book = book;
-  //   this.child?.showUpdateDialog();
-  // }
-
   addDialog() {
-    this.addChild?.showAddDialog();
+    this.addBook?.showAddDialog();
+  }
+
+  updateDialog(id: string) {
+    this.updateBook?.showUpdateDialog(id);
   }
 
   deleteDialog(_id: string) {
