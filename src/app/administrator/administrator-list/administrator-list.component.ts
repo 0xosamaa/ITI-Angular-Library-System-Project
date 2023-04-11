@@ -1,12 +1,6 @@
 import { AdministratorService } from 'src/app/services/administrator.service';
 import { Administrator } from './../../_models/administrator';
-import {
-  Component,
-  ViewChild,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ViewChild, OnChanges, OnInit } from '@angular/core';
 import { AdministratorAddingComponent } from '../administrator-adding/administrator-adding.component';
 import { AdministratorDetailsComponent } from '../administrator-details/administrator-details.component';
 import { AdministratorEditingComponent } from '../administrator-editing/administrator-editing.component';
@@ -21,7 +15,7 @@ import {
   styleUrls: ['./administrator-list.component.css'],
   providers: [ConfirmationService, MessageService],
 })
-export class AdministratorListComponent implements OnInit, OnChanges {
+export class AdministratorListComponent implements OnInit {
   administratorList: Administrator[] = [];
   wantedAdmin: Administrator | null = null;
 
@@ -47,31 +41,29 @@ export class AdministratorListComponent implements OnInit, OnChanges {
       }
     );
   }
-  ngOnChanges(): void {
-    this.adminService.getAllAdministrators().subscribe(
-      (data: any) => {
-        this.administratorList = data.data;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
 
-  displaydetailsModal(id: number) {
-    this.wantedAdmin = this.administratorList[id];
+  displaydetailsModal(selectedAdmin: Administrator) {
+    this.wantedAdmin = selectedAdmin;
     this.viewChild?.showDetails();
   }
-  displayEditModal(id: number) {
-    this.wantedAdmin = this.administratorList[id];
-    this.addChild?.showAddDialog();
+  displayEditModal(selectedAdmin: Administrator) {
+    this.wantedAdmin = selectedAdmin;
+    this.editChild?.togglingEditModal();
   }
+  editingCurrentAdministrator(editedAdmin: Administrator) {
+    let index = this.administratorList.findIndex(
+      (admin) => admin._id === editedAdmin._id
+    );
+    this.administratorList[index] = editedAdmin;
+  }
+
   displayAddModel() {
-    this.addChild?.showAddDialog();
+    this.addChild?.togglingAddDialog();
   }
-  // displayEditModal(id: any) {
-  //   this.editChild?.showEditgToggle(id);
-  // }
+  pushingNewAdministrator(newAdmin: Administrator) {
+    this.administratorList.push(newAdmin);
+  }
+
   confirm(id: any) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',

@@ -1,9 +1,9 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
-  SimpleChanges,
-  ChangeDetectorRef,
+  Output,
 } from '@angular/core';
 import { Administrator } from 'src/app/_models/administrator';
 import { AdministratorService } from 'src/app/services/administrator.service';
@@ -16,22 +16,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./administrator-editing.component.css'],
 })
 export class AdministratorEditingComponent implements OnChanges {
-  administrator: Administrator;
   editFormGroup: FormGroup;
-  hireDate: Date = new Date();
-  birthday: Date = new Date();
   visible: boolean = false;
 
   @Input() currentAdmin: Administrator | null = null;
+  @Output() administratorHasBeenEdited: EventEmitter<Administrator>;
 
   constructor(
     private adminService: AdministratorService,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe,
-    private changeDetector: ChangeDetectorRef
+    private datePipe: DatePipe
   ) {
-    this.administrator = new Administrator('', '', '', '', '', '', '', 0, '');
     this.editFormGroup = this.formBuilder.group({
+      _id: [''],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -39,51 +36,42 @@ export class AdministratorEditingComponent implements OnChanges {
       birthday: ['', [Validators.required]],
       hireDate: ['', [Validators.required]],
     });
+    this.administratorHasBeenEdited = new EventEmitter<Administrator>();
   }
 
   ngOnChanges(): void {
-    this.birthday = new Date(this.administrator.birthday);
-    this.hireDate = new Date(this.administrator.hireDate);
-
-    console.log(this.currentAdmin);
     this.editFormGroup.patchValue({
+      _id: this.currentAdmin?._id,
       firstName: this.currentAdmin?.firstName,
       lastName: this.currentAdmin?.lastName,
       email: this.currentAdmin?.email,
+      password: undefined,
       salary: this.currentAdmin?.salary,
       birthday: this.currentAdmin?.birthday,
       hireDate: this.currentAdmin?.hireDate,
     });
-    this.administrator = this.editFormGroup.value;
-    this.changeDetector.detectChanges();
-    console.log(this.editFormGroup.value);
   }
-
-  showEditgToggle(id: any) {
-    this.administrator._id = id;
-    this.adminService
-      .getAdministrator(this.administrator._id)
-      .subscribe((data: any) => {
-        this.administrator = data.data[0];
-      });
+  togglingEditModal() {
     this.visible = !this.visible;
   }
 
   editAdministrator() {
-    this.administrator.birthday = this.datePipe.transform(
-      this.birthday,
+    this.currentAdmin = this.editFormGroup.value;
+
+    this.currentAdmin!.birthday = this.datePipe.transform(
+      this.currentAdmin!.birthday,
       'yyyy-MM-dd'
     )!;
-    this.administrator.hireDate = this.datePipe.transform(
-      this.hireDate,
+    this.currentAdmin!.hireDate = this.datePipe.transform(
+      this.currentAdmin!.hireDate,
       'yyyy-MM-dd'
     )!;
 
     this.adminService
-      .updateAdministrator(this.administrator)
+      .updateAdministrator(this.currentAdmin!)
       .subscribe((data: any) => {
-        this.administrator = data.data;
-        this.visible = false;
+        this.administratorHasBeenEdited.emit(this.currentAdmin!);
+        this.togglingEditModal();
       });
   }
 }

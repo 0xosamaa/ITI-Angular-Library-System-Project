@@ -1,7 +1,7 @@
 <p-table
   [value]="administratorList"
   [paginator]="true"
-  [rows]="2"
+  [rows]="6"
   [showCurrentPageReport]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 >
@@ -21,40 +21,48 @@
       <th class="text-center">Operations</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body">
-    <!-- let-administrator -->
-    <tr *ngFor="let admin of administratorList; let i = index">
-      <td>{{ admin._id }}</td>
-      <td>{{ admin.firstName }}</td>
-      <td>{{ admin.lastName }}</td>
-      <td>{{ admin.email }}</td>
-      <td class="text-center">
-        <div>
-          <button
-            pButton
-            pRipple
-            type="button"
-            label="Info"
-            (click)="displaydetailsModal(i)"
-            class="p-button-outlined p-button-info mx-3"
-          ></button>
-        </div>
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="Edit"
-          (click)="displayEditModal(i)"
-          class="p-button-outlined p-button-secondary mx-3"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="Delete"
-          (click)="confirm(i)"
-          class="p-button-outlined p-button-danger mx-3"
-        ></button>
+  <ng-template pTemplate="body" let-admin>
+    <tr>
+      <td>
+        {{ admin._id }}
+      </td>
+      <td>
+        {{ admin.firstName }}
+      </td>
+      <td>
+        {{ admin.lastName }}
+      </td>
+      <td>
+        {{ admin.email }}
+      </td>
+      <!-- <td>
+        <i
+          class="pi"
+          [ngClass]="{
+            'text-success pi-check-circle': book.isAvailable,
+            'text-danger pi-times-circle': !book.isAvailable
+          }"
+        ></i>
+      </td> -->
+      <td class="d-flex justify-content-center">
+        <p-button
+          (click)="displaydetailsModal(admin)"
+          icon="pi pi-external-link"
+          class="m-2"
+          styleClass="p-button-rounded p-button-text p-button-raised"
+        ></p-button>
+        <p-button
+          (click)="displayEditModal(admin)"
+          icon="pi pi-pencil"
+          styleClass="p-button-success p-button-rounded p-button-text p-button-raised"
+          class="m-2"
+        ></p-button>
+        <p-button
+          (click)="confirm(admin._id)"
+          icon="pi pi-trash"
+          styleClass="p-button-danger p-button-rounded p-button-text p-button-raised"
+          class="m-2"
+        ></p-button>
       </td>
     </tr>
   </ng-template>
@@ -82,6 +90,9 @@
 
 <app-administrator-editing
   [currentAdmin]="wantedAdmin"
+  (administratorHasBeenEdited)="editingCurrentAdministrator($event)"
 ></app-administrator-editing>
 
-<app-administrator-adding></app-administrator-adding>
+<app-administrator-adding
+  (administratorHasBeenAdded)="pushingNewAdministrator($event)"
+></app-administrator-adding>
