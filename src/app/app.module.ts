@@ -49,6 +49,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { BorrowsComponent } from './borrows/borrows.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,9 @@ import { SideBarComponent } from './layout/side-bar/side-bar.component';
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
+
     SideBarComponent,
+    BorrowsComponent,
   ],
   imports: [
     CommonModule,

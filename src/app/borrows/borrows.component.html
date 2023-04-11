@@ -1,0 +1,69 @@
+<div class="content-wrapper" style="min-height: 1302.4px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Borrows</h1>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">List of Borrowed Books</h3>
+
+              <div class="card-tools">
+                <ul class="pagination pagination-sm float-right">
+                  <li class="page-item"><a class="page-link" href="#">«</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Book</th>
+                    <th>Employee</th>
+                    <th>Member</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+                    <th>Deadline Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let borrow of borrows">
+                    <td>{{ borrow['_id'] }}</td>
+                    <td>{{ borrow['bookID'] }}</td>
+                    <td>{{ borrow['employeeID'] }}</td>
+                    <td>{{ borrow['memberID'] }}</td>
+                    <td>{{ borrow['borrowDate'] }}</td>
+                    <td>{{ borrow['returnDate'] == '' ? 'Not returned' : borrow['returnDate'] }}</td>
+                    <td>{{ borrow['deadlineDate'] }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
