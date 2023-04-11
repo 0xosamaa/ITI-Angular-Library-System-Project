@@ -1,7 +1,7 @@
 <p-table
   [value]="administratorList"
   [paginator]="true"
-  [rows]="10"
+  [rows]="2"
   [showCurrentPageReport]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 >
@@ -21,27 +21,30 @@
       <th class="text-center">Operations</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-administrator>
-    <tr>
-      <td>{{ administrator._id }}</td>
-      <td>{{ administrator.firstName }}</td>
-      <td>{{ administrator.lastName }}</td>
-      <td>{{ administrator.email }}</td>
+  <ng-template pTemplate="body">
+    <!-- let-administrator -->
+    <tr *ngFor="let admin of administratorList; let i = index">
+      <td>{{ admin._id }}</td>
+      <td>{{ admin.firstName }}</td>
+      <td>{{ admin.lastName }}</td>
+      <td>{{ admin.email }}</td>
       <td class="text-center">
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="Info"
-          (click)="displaydetailsModal(administrator._id)"
-          class="p-button-outlined p-button-info mx-3"
-        ></button>
+        <div>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Info"
+            (click)="displaydetailsModal(i)"
+            class="p-button-outlined p-button-info mx-3"
+          ></button>
+        </div>
         <button
           pButton
           pRipple
           type="button"
           label="Edit"
-          (click)="displayEditModal(administrator._id)"
+          (click)="displayEditModal(i)"
           class="p-button-outlined p-button-secondary mx-3"
         ></button>
         <button
@@ -49,7 +52,7 @@
           pRipple
           type="button"
           label="Delete"
-          (click)="confirm(administrator._id)"
+          (click)="confirm(i)"
           class="p-button-outlined p-button-danger mx-3"
         ></button>
       </td>
@@ -57,9 +60,12 @@
   </ng-template>
 </p-table>
 
-<div class="add-button" (click)="displayAddModel()">
-  <h1>+</h1>
-</div>
+<p-button
+  id="add-btn"
+  (click)="displayAddModel()"
+  label="+"
+  styleClass="p-button-rounded"
+></p-button>
 
 <div>
   <p-toast></p-toast>
@@ -70,6 +76,12 @@
   ></p-confirmDialog>
 </div>
 
+<app-administrator-details
+  [currentAdmin]="wantedAdmin"
+></app-administrator-details>
+
+<app-administrator-editing
+  [currentAdmin]="wantedAdmin"
+></app-administrator-editing>
+
 <app-administrator-adding></app-administrator-adding>
-<app-administrator-details></app-administrator-details>
-<app-administrator-editing></app-administrator-editing>

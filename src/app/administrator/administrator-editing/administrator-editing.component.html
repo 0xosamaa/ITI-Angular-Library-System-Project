@@ -1,3 +1,4 @@
+<!-- <form [formGroup]="editFormGroup"> -->
 <p-dialog
   header="Edit Administrator"
   [(visible)]="visible"
@@ -8,74 +9,20 @@
     <div class="row">
       <div class="mb-3 col-6">
         <label class="form-label">First Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="administrator.firstName"
-        />
+        <input type="text" formControlName="firstName" class="form-control" />
       </div>
       <div class="mb-3 col-6">
         <label class="form-label">Last Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="administrator.lastName"
-        />
+        <input type="text" formControlName="lastName" class="form-control" />
       </div>
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        [(ngModel)]="administrator.email"
-      />
-    </div>
-    <!-- <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        [(ngModel)]="administrator.password"
-      />
-    </div> -->
-    <div class="row">
-      <div class="mb-3 col-6">
-        <label for="template" class="col-12 my-2">Hire Date</label>
-        <p-calendar [(ngModel)]="hireDate">
-          <ng-template pTemplate="date" let-date>
-            <span
-              [ngStyle]="{
-                textDecoration:
-                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
-              }"
-              >{{ date.day }}</span
-            >
-          </ng-template>
-        </p-calendar>
-      </div>
-      <div class="mb-3 col-6">
-        <label for="template" class="col-12 my-2">Birthday</label>
-        <p-calendar [(ngModel)]="birthday">
-          <ng-template pTemplate="date" let-date>
-            <span
-              [ngStyle]="{
-                textDecoration:
-                  date.day < 21 && date.day > 10 ? 'line-through' : 'inherit'
-              }"
-              >{{ date.day }}</span
-            >
-          </ng-template>
-        </p-calendar>
-      </div>
+      <input type="email" class="form-control" formControlName="email" />
     </div>
     <div class="mb-3">
       <label for="salary" class="form-label">Salary</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="administrator.salary"
-      />
+      <input type="text" formControlName="salary" class="form-control" />
     </div>
     <div class="mb-3">
       <label for="formFile" class="form-label">Upload Image : </label>
@@ -91,3 +38,4 @@
     ></p-button>
   </ng-template>
 </p-dialog>
+<!-- </form> -->
