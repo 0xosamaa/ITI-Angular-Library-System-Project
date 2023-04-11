@@ -51,7 +51,7 @@
                     <td>{{ borrow['employeeID'] }}</td>
                     <td>{{ borrow['memberID'] }}</td>
                     <td>{{ borrow['borrowDate'] }}</td>
-                    <td>{{ borrow['returnDate']?? 'Not returned' }}</td>
+                    <td>{{ borrow['returnDate'] == '' ? 'Not returned' : borrow['returnDate'] }}</td>
                     <td>{{ borrow['deadlineDate'] }}</td>
                   </tr>
                 </tbody>
