@@ -46,7 +46,12 @@
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Upload Image : </label>
-        <input class="form-control" type="file" accept="image/*" />
+        <input
+          class="form-control"
+          (change)="uploadImage($event)"
+          type="file"
+          accept="image/*"
+        />
       </div>
     </div>
     <ng-template pTemplate="footer">

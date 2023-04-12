@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Administrator } from 'src/app/_models/administrator';
 import { AdministratorService } from 'src/app/services/administrator.service';
 
@@ -29,14 +34,28 @@ export class AdministratorAddingComponent {
       hireDate: ['', [Validators.required]],
     });
   }
-
-  togglingAddDialog() {
-    this.visible = !this.visible;
+  uploadImage(event: any) {
+    this.addFormGroup.addControl('image', new FormControl());
+    this.addFormGroup.patchValue({
+      image: event.target.files[0],
+    });
   }
-
   addAdministrator() {
+    let fromData = new FormData();
+    fromData.append('firstName', this.addFormGroup.get('firstName')?.value);
+    fromData.append('lastName', this.addFormGroup.get('lastName')?.value);
+    fromData.append('email', this.addFormGroup.get('email')?.value);
+    fromData.append('password', this.addFormGroup.get('password')?.value);
+    fromData.append('salary', this.addFormGroup.get('salary')?.value);
+    fromData.append('birthday', this.addFormGroup.get('birthday')?.value);
+    fromData.append('hireDate', this.addFormGroup.get('hireDate')?.value);
+
+    if (this.addFormGroup.get('image')?.value != undefined)
+      fromData.append('image', this.addFormGroup.get('image')?.value);
+
     this.administrator = this.addFormGroup.value;
-    this.adminService.addAdministrator(this.administrator!).subscribe(
+
+    this.adminService.addAdministrator(fromData).subscribe(
       (data: any) => {
         this.administrator!._id = data['data']['_id'];
         this.administratorHasBeenAdded.emit(this.administrator!);
@@ -46,5 +65,8 @@ export class AdministratorAddingComponent {
         console.log(error);
       }
     );
+  }
+  togglingAddDialog() {
+    this.visible = !this.visible;
   }
 }

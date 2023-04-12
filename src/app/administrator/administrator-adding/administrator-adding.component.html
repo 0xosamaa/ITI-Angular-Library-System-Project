@@ -25,6 +25,7 @@
           <label for="password" class="form-label">Password</label>
           <input
             type="password"
+            [class.is-valid]="addFormGroup.invalid"
             class="form-control"
             formControlName="password"
           />
@@ -56,7 +57,13 @@
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Upload Image : </label>
-        <input class="form-control" type="file" accept="image/*" />
+        <input
+          class="form-control"
+          type="file"
+          formControlName="image"
+          (change)="uploadImage($event)"
+          accept="image/*"
+        />
       </div>
     </div>
     <ng-template pTemplate="footer">

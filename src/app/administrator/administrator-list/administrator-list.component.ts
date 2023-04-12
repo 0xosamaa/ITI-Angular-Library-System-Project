@@ -1,6 +1,12 @@
 import { AdministratorService } from 'src/app/services/administrator.service';
 import { Administrator } from './../../_models/administrator';
-import { Component, ViewChild, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { AdministratorAddingComponent } from '../administrator-adding/administrator-adding.component';
 import { AdministratorDetailsComponent } from '../administrator-details/administrator-details.component';
 import { AdministratorEditingComponent } from '../administrator-editing/administrator-editing.component';
@@ -15,7 +21,7 @@ import {
   styleUrls: ['./administrator-list.component.css'],
   providers: [ConfirmationService, MessageService],
 })
-export class AdministratorListComponent implements OnInit {
+export class AdministratorListComponent implements OnInit, OnChanges {
   administratorList: Administrator[] = [];
   wantedAdmin: Administrator | null = null;
 
@@ -31,6 +37,16 @@ export class AdministratorListComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
+  ngOnChanges(): void {
+    this.adminService.getAllAdministrators().subscribe(
+      (data: any) => {
+        this.administratorList = data.data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
   ngOnInit() {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
@@ -77,12 +93,13 @@ export class AdministratorListComponent implements OnInit {
         });
         this.adminService.deleteAdministrator(id).subscribe(
           () => {
-            this.adminService.getAllAdministrators().subscribe((data: any) => {
-              this.administratorList = data.data;
-            });
+            let index = this.administratorList.findIndex(
+              (admin) => admin._id === id
+            );
+            this.administratorList.splice(index, 1);
           },
           (error) => {
-            console.log(error.error.message);
+            console.log(error);
           }
         );
       },
