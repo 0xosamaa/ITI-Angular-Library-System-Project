@@ -17,6 +17,7 @@ export class UpdateBookComponent implements OnInit {
   ngOnInit(): void {
     this.bookService.bookUpdated.subscribe((book: Book) => {
       this.book = book;
+      this.book.datePublished = new Date(this.book.datePublished?.toString() || "");
     });
     this.bookService.showUpdate.subscribe((visible: boolean) => {
       this.visible = visible;

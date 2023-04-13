@@ -22,7 +22,7 @@ export class AddBookComponent {
     this.book.dateAdded = new Date();
     this.visible = false;
     this.bookService.addBook(new Book(
-      this.book.id,
+      this.book._id,
       this.book.title,
       this.book.author,
       this.book.publisher,
