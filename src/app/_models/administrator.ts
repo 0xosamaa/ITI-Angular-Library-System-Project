@@ -3,7 +3,7 @@ export class Administrator {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  password: any;
   birthday: string;
   hireDate: string;
   salary: number;
@@ -14,7 +14,7 @@ export class Administrator {
     _firstName: string,
     _lastName: string,
     _email: string,
-    _password: string,
+    _password: any,
     _birthday: string,
     _hireDate: string,
     _salary: number,

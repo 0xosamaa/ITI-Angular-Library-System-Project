@@ -1,7 +1,18 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { Administrator } from 'src/app/_models/administrator';
 import { AdministratorService } from 'src/app/services/administrator.service';
-import { DatePipe } from '@angular/common';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-administrator-editing',
@@ -9,47 +20,134 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./administrator-editing.component.css'],
 })
 export class AdministratorEditingComponent implements OnChanges {
-  administrator: Administrator;
-  hireDate: Date = new Date();
-  birthday: Date = new Date();
+  editFormGroup: FormGroup;
   visible: boolean = false;
+
+  @Input() currentAdmin: Administrator | null = null;
+  @Output() administratorHasBeenEdited: EventEmitter<Administrator>;
 
   constructor(
     private adminService: AdministratorService,
-    private datePipe: DatePipe
+    private formBuilder: FormBuilder
   ) {
-    this.administrator = new Administrator('', '', '', '', '', '', '', 0, '');
-  }
-  ngOnChanges(): void {
-    this.birthday = new Date(this.administrator.birthday);
-    this.hireDate = new Date(this.administrator.hireDate);
+    this.editFormGroup = this.formBuilder.group({
+      _id: [''],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      salary: ['', [Validators.required]],
+      birthday: ['', [Validators.required]],
+      hireDate: ['', [Validators.required]],
+    });
+    this.administratorHasBeenEdited = new EventEmitter<Administrator>();
   }
 
-  showEditgToggle(id: any) {
-    this.administrator._id = id;
-    this.adminService
-      .getAdministrator(this.administrator._id)
-      .subscribe((data: any) => {
-        this.administrator = data.data[0];
-      });
+  ngOnChanges(): void {
+    this.editFormGroup.patchValue({
+      _id: this.currentAdmin?._id,
+      firstName: this.currentAdmin?.firstName,
+      lastName: this.currentAdmin?.lastName,
+      email: this.currentAdmin?.email,
+      salary: this.currentAdmin?.salary,
+      birthday: new Date(Date.parse(this.currentAdmin!.birthday)),
+      hireDate: new Date(Date.parse(this.currentAdmin!.hireDate)),
+    });
+  }
+  togglingEditModal() {
     this.visible = !this.visible;
   }
-
+  uploadImage(event: any) {
+    this.editFormGroup.addControl('image', new FormControl());
+    this.editFormGroup.patchValue({
+      image: event.target.files[0],
+    });
+  }
   editAdministrator() {
-    this.administrator.birthday = this.datePipe.transform(
-      this.birthday,
-      'yyyy-MM-dd'
-    )!;
-    this.administrator.hireDate = this.datePipe.transform(
-      this.hireDate,
-      'yyyy-MM-dd'
-    )!;
+    let formData = new FormData();
+    formData.append('_id', this.editFormGroup.get('_id')?.value);
+    formData.append('firstName', this.editFormGroup.get('firstName')?.value);
+    formData.append('lastName', this.editFormGroup.get('lastName')?.value);
+    formData.append('email', this.editFormGroup.get('email')?.value);
+    formData.append('password', this.editFormGroup.get('password')?.value);
+    formData.append('salary', this.editFormGroup.get('salary')?.value);
+    formData.append(
+      'birthday',
+      this.editFormGroup.get('birthday')?.value.toISOString()
+    );
+    formData.append(
+      'hireDate',
+      this.editFormGroup.get('hireDate')?.value.toISOString()
+    );
 
-    this.adminService
-      .updateAdministrator(this.administrator)
-      .subscribe((data: any) => {
-        this.administrator = data.data;
-        this.visible = false;
-      });
+    if (this.editFormGroup.get('image')?.value !== undefined)
+      formData.append('image', this.editFormGroup.get('image')?.value);
+
+    this.adminService.updateAdministrator(formData).subscribe({
+      next: (data: any) => {
+        this.currentAdmin = this.editFormGroup.value;
+        this.administratorHasBeenEdited.emit(this.currentAdmin!);
+        this.togglingEditModal();
+      },
+      error: (error: any) => {
+        // Showing the Validation Errors to user on Template
+        let errorMessage = error.error.message;
+
+        if (errorMessage.includes('First Name is Required'))
+          this.editFormGroup.controls['firstName'].setErrors({
+            required: true,
+            minLength: 2,
+          });
+
+        if (errorMessage.includes('Last Name is Required'))
+          this.editFormGroup.controls['lastName'].setErrors({
+            required: true,
+            minLength: 2,
+          });
+
+        if (
+          errorMessage.includes(
+            'E11000 duplicate key error collection: test.administrators index: email_1 dup key: '
+          )
+        )
+          this.editFormGroup.controls['email'].setErrors({
+            duplication: 'Email must not be duplicated',
+          });
+
+        if (
+          errorMessage.includes('Password must be between 8 and 20 characters')
+        )
+          this.editFormGroup.controls['password'].setErrors({
+            required: true,
+            minlength: 2,
+            maxLength: 20,
+          });
+
+        if (errorMessage.includes('Salary must be a Number'))
+          this.editFormGroup.controls['salary'].setErrors({
+            type: 'salary must be number',
+          });
+
+        if (errorMessage.includes('Birthday must be in date format...!'))
+          this.editFormGroup.controls['salary'].setErrors({
+            format: 'Birthday must be in date format...!',
+          });
+
+        if (errorMessage.includes('Hire Date must be in date format...!'))
+          this.editFormGroup.controls['salary'].setErrors({
+            format: 'Hire Date must be in date format...!',
+          });
+
+        if (errorMessage.includes('Invalid value'))
+          this.editFormGroup.controls['password'].setErrors({
+            required: true,
+            minlength: 2,
+          });
+
+        if (errorMessage.includes('Image must be a String'))
+          this.editFormGroup.controls['image'].setErrors({
+            format: 'wrong image format',
+          });
+      },
+    });
   }
 }

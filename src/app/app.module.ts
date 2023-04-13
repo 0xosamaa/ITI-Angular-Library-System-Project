@@ -54,6 +54,7 @@ import { AddMemberComponent } from './member/add-member/add-member.component';
 import { EditMemberComponent } from './member/edit-member/edit-member.component';
 import { MemberDetailsComponent } from './member/member-details/member-details.component';
 import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
+import { BorrowsComponent } from './borrows/borrows.component';
 
 @NgModule({
   declarations: [
@@ -79,12 +80,14 @@ import { DeleteMemberComponent } from './member/delete-member/delete-member.comp
     AdministratorAddingComponent,
     AdministratorEditingComponent,
     AdministratorReportComponent,
+
     SideBarComponent,
     MemberListComponent,
     AddMemberComponent,
     EditMemberComponent,
     MemberDetailsComponent,
     DeleteMemberComponent,
+    BorrowsComponent,
   ],
   imports: [
     CommonModule,
