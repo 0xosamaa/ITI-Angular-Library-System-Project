@@ -37,8 +37,6 @@ export class BookListComponent implements OnInit {
       this.books.push(book);
     });
     this.bookService.bookUpdatedList.subscribe((book: Book) => {
-      console.log(this.books);
-      console.log(book);
       for(let i = 0; i < this.books.length; i++) {
         if (this.books[i]._id === book._id) {
           this.books[i] = book;
