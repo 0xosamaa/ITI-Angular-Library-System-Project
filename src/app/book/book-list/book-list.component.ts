@@ -33,8 +33,8 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.loading = false;
     this.getBooks();
-    this.bookService.bookAdded.subscribe((book: Book) => {
-      this.books.push(book);
+    this.bookService.bookAdded.subscribe((data: any) => {
+      this.books.push(data.book);
     });
     this.bookService.bookUpdatedList.subscribe((book: Book) => {
       for(let i = 0; i < this.books.length; i++) {
