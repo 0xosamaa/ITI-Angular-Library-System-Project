@@ -47,6 +47,17 @@ export class AddBookComponent {
   onDialogHide() {
     this.submitted = false;
     this.bookForm.reset();
+    this.bookForm.setValue({
+      title: '',
+      author: '',
+      publisher: '',
+      datePublished: '',
+      category: '',
+      pagesCount: 1,
+      copiesCount: 1,
+      isAvailable: true,
+      shelfNo: 1
+    })
   }
 
   add() {
