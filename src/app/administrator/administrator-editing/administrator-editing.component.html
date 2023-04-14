@@ -1,41 +1,185 @@
-<!-- <form [formGroup]="editFormGroup"> -->
-<p-dialog
-  header="Edit Administrator"
-  [(visible)]="visible"
-  [modal]="true"
-  [style]="{ width: '75vw' }"
->
-  <div>
-    <div class="row">
-      <div class="mb-3 col-6">
-        <label class="form-label">First Name</label>
-        <input type="text" formControlName="firstName" class="form-control" />
+<form [formGroup]="editFormGroup">
+  <p-dialog
+    header="Edit Administrator"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '75vw' }"
+  >
+    <div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            [class.is-valid]="!editFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <div
+            [hidden]="
+              editFormGroup.get('firstName')?.valid ||
+              editFormGroup.get('firstName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('firstName')?.errors?.['required']"
+              ><li class="mt-2">First Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('firstName')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            [class.is-valid]="!editFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <div
+            [hidden]="
+              editFormGroup.get('lastName')?.valid ||
+              editFormGroup.get('lastName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('lastName')?.errors?.['required']"
+              ><li class="mt-2">Last Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('lastName')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
       </div>
-      <div class="mb-3 col-6">
-        <label class="form-label">Last Name</label>
-        <input type="text" formControlName="lastName" class="form-control" />
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          [class.is-valid]="!editFormGroup.get('email')?.errors"
+          class="form-control"
+          formControlName="email"
+        />
+        <div
+          [hidden]="
+            editFormGroup.get('email')?.valid ||
+            editFormGroup.get('email')?.untouched
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="editFormGroup.get('email')?.errors?.['required']"
+            ><li class="mt-2">Email Is Required</li></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="editFormGroup.get('email')?.errors?.['email']"
+            ><li class="mt-2">The pattern needs to be for email</li></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="editFormGroup.get('email')?.errors?.['duplication']"
+            ><li class="mt-2">Email can't be duplicated</li></small
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="salary" class="form-label">Salary</label>
+        <input
+          type="text"
+          [class.is-valid]="!editFormGroup.get('salary')?.errors"
+          class="form-control"
+          formControlName="salary"
+        />
+        <div
+          [hidden]="
+            editFormGroup.get('salary')?.valid ||
+            editFormGroup.get('salary')?.untouched
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="editFormGroup.get('salary')?.errors?.['required']"
+            ><li class="mt-2">Salary Is Required</li></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="editFormGroup.get('salary')?.errors?.['type']"
+            ><li class="mt-2">Salary must be a number</li></small
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Hire Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="hireDate"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              editFormGroup.get('hireDate')?.valid ||
+              editFormGroup.get('hireDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('hireDate')?.errors?.['required']"
+              ><li class="mt-2">Birthday Is Required</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Birthday</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="birthday"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              editFormGroup.get('birthday')?.valid ||
+              editFormGroup.get('birthday')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('birthday')?.errors?.['required']"
+              ><li class="mt-2">Birthday Is Required</li></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Upload Image : </label>
+        <input
+          class="form-control"
+          formControlName="image"
+          (change)="uploadImage($event)"
+          type="file"
+          accept="image/*"
+        />
       </div>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" formControlName="email" />
-    </div>
-    <div class="mb-3">
-      <label for="salary" class="form-label">Salary</label>
-      <input type="text" formControlName="salary" class="form-control" />
-    </div>
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Upload Image : </label>
-      <input class="form-control" type="file" accept="image/*" />
-    </div>
-  </div>
-  <ng-template pTemplate="footer">
-    <p-button
-      (onClick)="editAdministrator()"
-      icon="pi pi-check"
-      label="Ok"
-      styleClass="p-button-text"
-    ></p-button>
-  </ng-template>
-</p-dialog>
-<!-- </form> -->
+    <ng-template pTemplate="footer">
+      <p-button
+        (onClick)="editAdministrator()"
+        icon="pi pi-check"
+        label="Edit"
+        [disabled]="editFormGroup.invalid"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>

@@ -9,25 +9,114 @@
       <div class="row">
         <div class="mb-3 col-6">
           <label class="form-label">First Name</label>
-          <input type="text" class="form-control" formControlName="firstName" />
+          <input
+            type="text"
+            [class.is-valid]="!addFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('firstName')?.valid ||
+              addFormGroup.get('firstName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('firstName')?.errors?.['required']"
+              ><li class="mt-2">First Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('firstName')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
         </div>
         <div class="mb-3 col-6">
           <label class="form-label">Last Name</label>
-          <input type="text" class="form-control" formControlName="lastName" />
+          <input
+            type="text"
+            [class.is-valid]="!addFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('lastName')?.valid ||
+              addFormGroup.get('lastName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('lastName')?.errors?.['required']"
+              ><li class="mt-2">Last Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('lastName')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="mb-3 col-6">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" formControlName="email" />
+          <input
+            type="email"
+            [class.is-valid]="!addFormGroup.get('email')?.errors"
+            class="form-control"
+            formControlName="email"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('email')?.valid ||
+              addFormGroup.get('email')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['required']"
+              ><li class="mt-2">Email Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['email']"
+              ><li class="mt-2">The pattern needs to be for email</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['duplication']"
+              ><li class="mt-2">Email can't be duplicated</li></small
+            >
+          </div>
         </div>
         <div class="mb-3 col-6">
           <label for="password" class="form-label">Password</label>
           <input
             type="password"
+            [class.is-valid]="!addFormGroup.get('password')?.errors"
             class="form-control"
             formControlName="password"
           />
+          <div
+            [hidden]="
+              addFormGroup.get('password')?.valid ||
+              addFormGroup.get('password')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('password')?.errors?.['required']"
+              ><li class="mt-2">Password Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('password')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 9 Characters</li></small
+            >
+          </div>
         </div>
       </div>
       <div class="row">
@@ -39,6 +128,18 @@
             formControlName="hireDate"
             appendTo="body"
           ></p-calendar>
+          <div
+            [hidden]="
+              addFormGroup.get('hireDate')?.valid ||
+              addFormGroup.get('hireDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('hireDate')?.errors?.['required']"
+              ><li class="mt-2">Hire Date Is Required</li></small
+            >
+          </div>
         </div>
         <div class="mb-3 col-6">
           <label for="template" class="col-12 my-2">Birthday</label>
@@ -48,15 +149,55 @@
             formControlName="birthday"
             appendTo="body"
           ></p-calendar>
+          <div
+            [hidden]="
+              addFormGroup.get('birthday')?.valid ||
+              addFormGroup.get('birthday')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('birthday')?.errors?.['required']"
+              ><li class="mt-2">Birthday Is Required</li></small
+            >
+          </div>
         </div>
       </div>
       <div class="mb-3">
         <label for="salary" class="form-label">Salary</label>
-        <input type="text" class="form-control" formControlName="salary" />
+        <input
+          type="text"
+          [class.is-valid]="!addFormGroup.get('salary')?.errors"
+          class="form-control"
+          formControlName="salary"
+        />
+        <div
+          [hidden]="
+            addFormGroup.get('salary')?.valid ||
+            addFormGroup.get('salary')?.untouched
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="addFormGroup.get('salary')?.errors?.['required']"
+            ><li class="mt-2">Salary Is Required</li></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="addFormGroup.get('salary')?.errors?.['type']"
+            ><li class="mt-2">Salary must be a number</li></small
+          >
+        </div>
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Upload Image : </label>
-        <input class="form-control" type="file" accept="image/*" />
+        <input
+          class="form-control"
+          type="file"
+          formControlName="image"
+          (change)="uploadImage($event)"
+          accept="image/*"
+        />
       </div>
     </div>
     <ng-template pTemplate="footer">
