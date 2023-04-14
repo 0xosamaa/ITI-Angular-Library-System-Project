@@ -26,6 +26,7 @@ export class DeleteBookComponent {
         this.bookService.deleteBook(id).subscribe(
           (data:any) => {
             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Book deleted successfully' });
+            this.bookService.deletedBookId.emit(id);
           },
           (error) => {
             console.log(error.error.message);

@@ -77,14 +77,6 @@ export class BookService {
   }
 
   deleteBook(id: string) {
-    return this.http.delete(this.baseURL + '/books/id/' + id)
-    // .subscribe(
-    //   (data) => {
-    //     this.deletedBookId.emit(id);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    return this.http.delete(this.baseURL + '/books/id/' + id);
   }
 }
