@@ -49,6 +49,11 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { MemberListComponent } from './member/member-list/member-list.component';
+import { AddMemberComponent } from './member/add-member/add-member.component';
+import { EditMemberComponent } from './member/edit-member/edit-member.component';
+import { MemberDetailsComponent } from './member/member-details/member-details.component';
+import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
 import { BorrowsComponent } from './borrows/borrows.component';
 
 @NgModule({
@@ -77,6 +82,11 @@ import { BorrowsComponent } from './borrows/borrows.component';
     AdministratorReportComponent,
 
     SideBarComponent,
+    MemberListComponent,
+    AddMemberComponent,
+    EditMemberComponent,
+    MemberDetailsComponent,
+    DeleteMemberComponent,
     BorrowsComponent,
   ],
   imports: [
@@ -106,7 +116,7 @@ import { BorrowsComponent } from './borrows/borrows.component';
     ReactiveFormsModule,
   ],
   providers: [
-    { provide: 'baseURL', useValue: 'http://localhost:8080' },
+    { provide: 'baseURL', useValue: 'http://localhost:8081' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
