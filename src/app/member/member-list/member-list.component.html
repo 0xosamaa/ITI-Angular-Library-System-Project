@@ -1,0 +1,122 @@
+<p-table
+    #dt2
+    [value]="members"
+    dataKey="id"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['fullName','email','phoneNumber','address','isBanned','created_at','image']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    >
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt2.filterGlobal($event.target, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Banned</th>
+            <th class="text-center">Created&nbsp;At</th>
+            <th class="text-center">Image</th>
+            <th class="text-center">Operations</th>
+        </tr>
+        <!-- <tr>
+            <th>
+                <p-columnFilter type="text" field="name"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="country.name"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="representative" matchMode="in" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value"  placeholder="Any" optionLabel="name">
+                            <ng-template let-option pTemplate="item">
+                                <div class="inline-block vertical-align-middle">
+                                    <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
+                                    <span class="ml-1 mt-1">{{ option.name }}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value"  (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <p-tag [value]="option.value" ></p-tag>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="boolean" field="verified"></p-columnFilter>
+            </th>
+        </tr> -->
+    </ng-template>
+    <ng-template pTemplate="body" let-member>
+        <tr>
+            <td >
+                {{ member.fullName }}
+            </td>
+            <td>
+                {{ member.email }}
+            </td>
+
+            <td *ngIf="!member.fullAddress">
+                <small class="text-yellow">No Address</small>
+            </td>
+            <td *ngIf="member.fullAddress">
+                {{ member.fullAddress.building }},{{ member.fullAddress.street }},{{ member.fullAddress.city }}
+            </td>
+
+             <td *ngIf="!member.phoneNumber" class="text-center">
+                <small class="text-yellow">No Phone Number</small>
+            </td>
+            <td *ngIf="member.phoneNumber">
+                {{ member.phoneNumber }}
+            </td>
+
+            <td class="text-center">
+                <i class="pi" [ngClass]="{ 'text-green pi-check-circle': member.isBanned, 'text-red pi-times-circle': !member.isBanned }"></i>
+            </td>
+            <td class="text-center">
+                {{ member.createdAt | date}}
+            </td>
+            <td class="text-center">
+                <img src="{{ member.image }}" alt="no image" style="width: 70px;border-radius: 50%;">
+            </td>
+            <td class="d-flex justify-content-center">
+                <p-button  (click)="details(member._id)" icon="pi pi-external-link" class="m-2" styleClass="p-button-rounded p-button-text p-button-raised"></p-button>
+                <p-button  icon="pi pi-pencil" styleClass="p-button-success p-button-rounded p-button-text p-button-raised" class="m-2"></p-button> <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="updateDialog(book._id)" -->
+                <p-button  (click)="deleteSingleMember(member._id)" icon="pi pi-trash" styleClass="p-button-danger p-button-rounded p-button-text p-button-raised" class="m-2"></p-button>  <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="deleteDialog(book._id)" -->
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-button id="add-btn" (click)="addForm()" label="+" styleClass="p-button-rounded" style="position:fixed; right:50px; bottom: 25px;"></p-button>  
+<!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" -->
+
+<app-add-member></app-add-member>
+<app-delete-member></app-delete-member>
+<app-edit-member></app-edit-member>
+<app-member-details></app-member-details>

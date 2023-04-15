@@ -10,6 +10,7 @@ import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BorrowsComponent } from "./borrows/borrows.component";
+import { MemberListComponent } from './member/member-list/member-list.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     component: BorrowsComponent,
     // canActivate: [AdminGuardGuard],
   },
+  {path: 'members', component: MemberListComponent}
 ];
 
 @NgModule({

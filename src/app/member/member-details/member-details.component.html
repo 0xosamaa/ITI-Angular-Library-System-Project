@@ -1,0 +1,58 @@
+<p-dialog header="Member Details" [(visible)]="flag" [modal]="true" [style]="{ width: '40vw' }" [draggable]="false" [resizable]="false">
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Full Name</th>
+                <td>{{memberDetails.fullName}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{memberDetails.email}}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{memberDetails.password}}</td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td *ngIf="memberDetails.phoneNumber">{{memberDetails.phoneNumber}}</td>
+                <td *ngIf="!memberDetails.phoneNumber">
+                    <small class="text-yellow">No Phone Number Reqistered</small>
+                </td>
+            </tr>
+            <tr>
+                <th>Banned</th>
+                <td>
+                    <i class="pi" [ngClass]="{ 'text-green pi-check-circle': memberDetails.isBanned, 'text-red pi-times-circle': !memberDetails.isBanned }"></i>
+                </td>
+            </tr>
+            <tr>
+                <th>Settings</th>
+                <td>{{memberDetails.settings}}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{memberDetails.createdAt}}</td>
+            </tr>
+            <tr>
+                <th>Birth Date</th>
+                <td *ngIf="memberDetails.birthDate">{{memberDetails.birthDate}}</td>
+                <td *ngIf="!memberDetails.birthDate">
+                    <small class="text-yellow">No Birth Date Reqistered</small>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Full Address</th>
+                <td *ngIf="!memberDetails.fullAddress">
+                    <small class="text-yellow">No Address</small>
+                </td>
+                <td *ngIf="memberDetails.fullAddress">
+                    {{ memberDetails.fullAddress.building }},{{ memberDetails.fullAddress.street }},{{ memberDetails.fullAddress.city }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</p-dialog>
