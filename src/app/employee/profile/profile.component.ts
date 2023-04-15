@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit{
     fileSource: new FormControl('', [Validators.required])
   });
   visible:boolean = false;
-  constructor(private empService:EmployeeService) {
+  constructor(private empService:EmployeeService, private authService:AuthService) {
     if(localStorage.getItem('data') != null) {
       //this.userData = new Employee("","","","","", "", "", "","",0);
       this.userData = JSON.parse(localStorage.getItem('data') || '{}');
@@ -53,12 +53,18 @@ export class ProfileComponent implements OnInit{
       .subscribe(res => {
         this.visible = false;
         this.empService.getEmployee(this.userData._id)
-          .subscribe((data:any) => {
-            this.userData = data.data;
-            localStorage.setItem('data', JSON.stringify(this.userData));
-            localStorage.setItem('settings', this.userData.settings);
-          } , error => {
-            console.log(error);
+          .subscribe({
+            next: (data: any) => {
+              this.userData = data.data;
+              localStorage.setItem('data', JSON.stringify(this.userData));
+              localStorage.setItem('settings', this.userData.settings);
+              localStorage.setItem('role', this.userData.role);
+              this.authService.role = this.userData.role;
+              this.authService.settings = this.userData.settings;
+              this.authService.data = this.userData;
+            }, error: (error) => {
+              console.log(error);
+            }
           })
 
       })
@@ -78,6 +84,17 @@ export class ProfileComponent implements OnInit{
 
   updateProfile() {
     this.child?.showUpdateDialog();
+  }
+
+  updateData(){
+    this.empService.getEmployee(this.userData._id)
+      .subscribe((data:any) => {
+        this.userData = data.data;
+        localStorage.setItem('data', JSON.stringify(this.userData));
+        localStorage.setItem('settings', this.userData.settings);
+      } , error => {
+        console.log(error);
+      })
   }
 
   logout() {
