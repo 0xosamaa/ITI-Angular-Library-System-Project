@@ -13,6 +13,7 @@ import { MemberService } from 'src/app/services/member.service';
 export class AddMemberComponent {
   flag:boolean = false;
   memberForm:FormGroup;
+  error:string='';
 
   constructor(private formBuilder:FormBuilder, private memberService:MemberService, private router:Router){
     this.memberForm = this.formBuilder.group({
@@ -51,7 +52,15 @@ export class AddMemberComponent {
         memberData.append('image', this.memberForm.get('image')?.value);
       }
 
-      this.memberService.addMember(memberData);
+      this.memberService.addMember(memberData).subscribe(
+        (res)=>{
+          console.log(res);
+        },
+        (error)=>{
+          console.log(error);
+          this.error = 'Error occured while adding this new member...';
+        }
+      );
       this.router.navigate(["/members"]);
     }else {
       // show error messages

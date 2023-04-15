@@ -61,6 +61,7 @@ import { BorrowAddingComponent } from './borrow/borrow-adding/borrow-adding.comp
 import { BorrowEditingComponent } from './borrow/borrow-editing/borrow-editing.component';
 import { BorrowListComponent } from './borrow/borrow-list/borrow-list.component';
 import { BorrowComponent } from './borrow/borrow.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { BorrowComponent } from './borrow/borrow.component';
     BorrowEditingComponent,
     BorrowListComponent,
     BorrowComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,
