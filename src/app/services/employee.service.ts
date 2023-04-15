@@ -21,7 +21,7 @@ export class EmployeeService {
     return this.http.get(this.baseURL + "/employee/" + id);
   }
 
-  addEmployee(employee: Employee) {
+  addEmployee(employee: Employee | FormData) {
     return this.http.post(this.baseURL + "/employee", employee);
   }
 

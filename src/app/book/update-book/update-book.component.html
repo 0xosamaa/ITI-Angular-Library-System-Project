@@ -1,1 +1,277 @@
-<p>update-book works!</p>
+<form [formGroup]="bookForm">
+  <p-dialog
+    header="Update Book"
+    [(visible)]="visible"
+    (onHide)="onDialogHide()"
+    [modal]="true"
+    [style]="{ maxWidth: '600px', width: '100%', margin: '20px' }"
+  >
+    <div class="cont">
+      <div class="d-flex justify-content-around align-items-center mt-3">
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label htmlFor="title">Title</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('title')?.invalid) ||
+                bookForm.get('title')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('title')?.errors?.['required']">
+                Title is required
+              </div>
+            </div>
+          </div>
+          <input
+            class="input"
+            pInputText
+            id="title"
+            formControlName="title"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('title')?.invalid) ||
+                (bookForm.get('title')?.touched &&
+                  bookForm.get('title')?.invalid)
+            }"
+          />
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label htmlFor="author">Author</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('author')?.invalid) ||
+                bookForm.get('author')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('author')?.errors?.['required']">
+                Author is required
+              </div>
+            </div>
+          </div>
+          <input
+            class="input"
+            pInputText
+            id="author"
+            formControlName="author"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('author')?.invalid) ||
+                (bookForm.get('author')?.touched &&
+                  bookForm.get('author')?.invalid)
+            }"
+          />
+        </div>
+      </div>
+      <div class="d-flex justify-content-around align-items-center mt-3">
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label htmlFor="publisher">Publisher</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('publisher')?.invalid) ||
+                bookForm.get('publisher')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('publisher')?.errors?.['required']">
+                Publisher is required
+              </div>
+            </div>
+          </div>
+          <input
+            class="input"
+            pInputText
+            id="publisher"
+            formControlName="publisher"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('publisher')?.invalid) ||
+                (bookForm.get('publisher')?.touched &&
+                  bookForm.get('publisher')?.invalid)
+            }"
+          />
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label htmlFor="category">Category</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('category')?.invalid) ||
+                bookForm.get('category')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('category')?.errors?.['required']">
+                Category is required
+              </div>
+            </div>
+          </div>
+          <input
+            class="input"
+            pInputText
+            id="category"
+            formControlName="category"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('category')?.invalid) ||
+                (bookForm.get('category')?.touched &&
+                  bookForm.get('category')?.invalid)
+            }"
+          />
+        </div>
+      </div>
+      <div class="d-flex justify-content-around align-items-center mt-3">
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label for="pages-count">No. of pages</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('pagesCount')?.invalid) ||
+                bookForm.get('pagesCount')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('pagesCount')?.errors?.['required']">
+                N Pages is required
+              </div>
+              <div *ngIf="bookForm.get('pagesCount')?.errors?.['min']">
+                Minimum = 1
+              </div>
+              <div *ngIf="bookForm.get('pagesCount')?.errors?.['max']">
+                Maximum = 1800
+              </div>
+            </div>
+          </div>
+          <p-inputNumber
+            styleClass="input-styling"
+            formControlName="pagesCount"
+            inputId="pages-count"
+            mode="decimal"
+            [min]="1"
+            [max]="1800"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('pagesCount')?.invalid) ||
+                (bookForm.get('pagesCount')?.touched &&
+                  bookForm.get('pagesCount')?.invalid)
+            }"
+          ></p-inputNumber>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label for="pages-count">No. of copies</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('copiesCount')?.invalid) ||
+                bookForm.get('copiesCount')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('copiesCount')?.errors?.['required']">
+                N Copies is required
+              </div>
+              <div *ngIf="bookForm.get('copiesCount')?.errors?.['min']">
+                Minimum = 1
+              </div>
+              <div *ngIf="bookForm.get('copiesCount')?.errors?.['max']">
+                Maximum = 100
+              </div>
+            </div>
+          </div>
+          <p-inputNumber
+            styleClass="input-styling"
+            formControlName="copiesCount"
+            inputId="copies-count"
+            mode="decimal"
+            [min]="1"
+            [max]="100"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('copiesCount')?.invalid) ||
+                (bookForm.get('copiesCount')?.touched &&
+                  bookForm.get('copiesCount')?.invalid)
+            }"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <div class="d-flex justify-content-around align-items-center mt-3">
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label for="publish-date">Publish date</label>
+            <div
+              *ngIf="submitted && bookForm.get('datePublished')?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('datePublished')?.errors?.['required']">
+                P. Date is required
+              </div>
+            </div>
+          </div>
+          <p-calendar
+            styleClass="input-styling"
+            [touchUI]="true"
+            formControlName="datePublished"
+            appendTo="body"
+          ></p-calendar>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <label for="shelf-no">Shelf No.</label>
+            <div
+              *ngIf="
+                (submitted && bookForm.get('shelfNo')?.invalid) ||
+                bookForm.get('shelfNo')?.touched
+              "
+              class="text-danger"
+            >
+              <div *ngIf="bookForm.get('shelfNo')?.errors?.['required']">
+                Shelf No. is required
+              </div>
+              <div *ngIf="bookForm.get('shelfNo')?.errors?.['min']">
+                Minimum = 1
+              </div>
+              <div *ngIf="bookForm.get('shelfNo')?.errors?.['max']">
+                Maximum = 100
+              </div>
+            </div>
+          </div>
+          <p-inputNumber
+            styleClass="input-styling"
+            formControlName="shelfNo"
+            inputId="shelf-no"
+            mode="decimal"
+            [min]="1"
+            [max]="100"
+            [ngClass]="{
+              'invalid-input':
+                (submitted && bookForm.get('shelfNo')?.invalid) ||
+                (bookForm.get('shelfNo')?.touched &&
+                  bookForm.get('shelfNo')?.invalid)
+            }"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start align-items-center mt-3">
+        <div class="d-flex align-items-start gap-2 mx-3">
+          <p-checkbox
+            formControlName="isAvailable"
+            [binary]="true"
+            inputId="available"
+          ></p-checkbox>
+          <label for="available">Available</label>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <p-button
+          class="button"
+          (click)="update()"
+          styleClass="p-button-primary"
+          label="Update"
+        ></p-button>
+      </div>
+    </div>
+  </p-dialog>
+</form>

@@ -1,3 +1,7 @@
 ::ng-deep .input-styling input, .input {
   width: 250px !important;
 }
+
+.invalid-input {
+  border-color: red !important;
+}

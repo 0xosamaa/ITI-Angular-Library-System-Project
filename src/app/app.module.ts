@@ -34,7 +34,6 @@ import { MessagesModule } from 'primeng/messages';
 import { InputMaskModule } from 'primeng/inputmask';
 import { BookListComponent } from './book/book-list/book-list.component';
 
-
 import { AddBookComponent } from './book/add-book/add-book.component';
 import { UpdateBookComponent } from './book/update-book/update-book.component';
 import { DeleteBookComponent } from './book/delete-book/delete-book.component';
@@ -47,6 +46,20 @@ import { AdministratorListComponent } from './administrator/administrator-list/a
 import { AdministratorAddingComponent } from './administrator/administrator-adding/administrator-adding.component';
 import { AdministratorEditingComponent } from './administrator/administrator-editing/administrator-editing.component';
 import { AdministratorReportComponent } from './report/administrator-report/administrator-report.component';
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { MemberListComponent } from './member/member-list/member-list.component';
+import { AddMemberComponent } from './member/add-member/add-member.component';
+import { EditMemberComponent } from './member/edit-member/edit-member.component';
+import { MemberDetailsComponent } from './member/member-details/member-details.component';
+import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
+import { HomeComponent } from './home/home.component';
+import { BorrowDetailsComponent } from './borrow/borrow-details/borrow-details.component';
+import { BorrowAddingComponent } from './borrow/borrow-adding/borrow-adding.component';
+import { BorrowEditingComponent } from './borrow/borrow-editing/borrow-editing.component';
+import { BorrowListComponent } from './borrow/borrow-list/borrow-list.component';
+import { BorrowComponent } from './borrow/borrow.component';
 
 
 @NgModule({
@@ -74,8 +87,22 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
     AdministratorEditingComponent,
     AdministratorReportComponent,
 
+    SideBarComponent,
+    MemberListComponent,
+    AddMemberComponent,
+    EditMemberComponent,
+    MemberDetailsComponent,
+    DeleteMemberComponent,
+    HomeComponent,
+    
+    BorrowDetailsComponent,
+    BorrowAddingComponent,
+    BorrowEditingComponent,
+    BorrowListComponent,
+    BorrowComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     InputMaskModule,
@@ -107,6 +134,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
       useClass: AuthInterceptorService,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

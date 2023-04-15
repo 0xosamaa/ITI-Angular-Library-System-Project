@@ -9,9 +9,16 @@ import { EmpGuardGuard } from './guards/emp-guard.guard';
 import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BookListComponent } from './book/book-list/book-list.component';
+import { BorrowComponent } from "./borrow/borrow.component";
+import { MemberListComponent } from './member/member-list/member-list.component';
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  {path: 'books',component:BookListComponent, canActivate: [AdminGuardGuard]},
+  {
+    path: 'books',
+    component: BookListComponent,
+    canActivate: [AdminGuardGuard],
+  },
   { path: 'workers/login', component: WorkerLoginComponent },
   {
     path: 'employees',
@@ -23,12 +30,19 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [ProfileGuard],
   },
-  { path: '', component: TestComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'administrators',
     component: AdministratorComponent,
     // canActivate: [AdminGuardGuard],
   },
+  {
+    path: 'borrows',
+    component: BorrowComponent,
+    canActivate: [EmpGuardGuard],
+  },
+  {path: 'members', component: MemberListComponent},
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({

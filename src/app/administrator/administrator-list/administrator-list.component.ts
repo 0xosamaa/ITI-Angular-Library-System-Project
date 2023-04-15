@@ -23,6 +23,7 @@ import {
 })
 export class AdministratorListComponent implements OnInit, OnChanges {
   administratorList: Administrator[] = [];
+  wantedAdmin: Administrator | null = null;
 
   @ViewChild(AdministratorAddingComponent)
   addChild: AdministratorAddingComponent | undefined;
@@ -36,7 +37,7 @@ export class AdministratorListComponent implements OnInit, OnChanges {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
         this.administratorList = data.data;
@@ -46,7 +47,6 @@ export class AdministratorListComponent implements OnInit, OnChanges {
       }
     );
   }
-
   ngOnInit() {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
@@ -57,15 +57,29 @@ export class AdministratorListComponent implements OnInit, OnChanges {
       }
     );
   }
-  displaydetailsModal(id: any) {
-    this.viewChild?.showDialogToggle(id);
+
+  displaydetailsModal(selectedAdmin: Administrator) {
+    this.wantedAdmin = selectedAdmin;
+    this.viewChild?.showDetails();
   }
+  displayEditModal(selectedAdmin: Administrator) {
+    this.wantedAdmin = selectedAdmin;
+    this.editChild?.togglingEditModal();
+  }
+  editingCurrentAdministrator(editedAdmin: Administrator) {
+    let index = this.administratorList.findIndex(
+      (admin) => admin._id === editedAdmin._id
+    );
+    this.administratorList[index] = editedAdmin;
+  }
+
   displayAddModel() {
-    this.addChild?.showAddDialog();
+    this.addChild?.togglingAddDialog();
   }
-  displayEditModal(id: any) {
-    this.editChild?.showEditgToggle(id);
+  pushingNewAdministrator(newAdmin: Administrator) {
+    this.administratorList.push(newAdmin);
   }
+
   confirm(id: any) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
@@ -79,12 +93,13 @@ export class AdministratorListComponent implements OnInit, OnChanges {
         });
         this.adminService.deleteAdministrator(id).subscribe(
           () => {
-            this.adminService.getAllAdministrators().subscribe((data: any) => {
-              this.administratorList = data.data;
-            });
+            let index = this.administratorList.findIndex(
+              (admin) => admin._id === id
+            );
+            this.administratorList.splice(index, 1);
           },
           (error) => {
-            console.log(error.error.message);
+            console.log(error);
           }
         );
       },
