@@ -29,14 +29,7 @@ export class MemberService {
   }
 
   addMember(member:FormData){
-    return this.http.post(this.baseURL+"/members", member).subscribe(
-      (res)=>{
-        console.log(res);
-      },
-      (error)=>{
-        console.log(error);
-      }
-    );
+    return this.http.post(this.baseURL+"/members", member);
   }
 
   deleteMember(id:string){

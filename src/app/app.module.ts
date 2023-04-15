@@ -56,6 +56,7 @@ import { MemberDetailsComponent } from './member/member-details/member-details.c
 import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
 import { BorrowsComponent } from './borrows/borrows.component';
 import { HomeComponent } from './home/home.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { HomeComponent } from './home/home.component';
     DeleteMemberComponent,
     BorrowsComponent,
     HomeComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+<app-error-message [errorMessage]="error"></app-error-message>
 <p-table
     #dt2
     [value]="members"
@@ -25,6 +26,7 @@
             <th>Email</th>
             <th class="text-center">Banned</th>
             <th class="text-center">Created&nbsp;At</th>
+            <th class="text-center">Birth Date</th>
             <th class="text-center">Operations</th>
         </tr>
         <!-- <tr>
@@ -80,6 +82,10 @@
             
             <td class="text-center">
                 {{ member.createdAt | date}}
+            </td>
+
+            <td class="text-center">
+                {{ member.birthDate | date}}
             </td>
 
             <td class="d-flex justify-content-center">
