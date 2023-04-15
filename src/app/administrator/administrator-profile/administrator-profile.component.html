@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="main-body">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active col-6 mt-2" aria-current="page">
+          Profile
+        </li>
+        <div class="text-end col-6">
+          <a
+            style="width: 150px"
+            class="btn btn-info rounded-pill"
+            (click)="displayEditModal()"
+            target="__blank"
+            >Edit</a
+          >
+        </div>
+      </ol>
+    </nav>
+    <!-- /Breadcrumb -->
+
+    <div class="row">
+      <div class="col-3 mb-3">
+        <div class="card">
+          <div class="card-body card-height">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="http://localhost:8080/images/administrator/{{
+                  loggedInAdmin?.image
+                }}"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-9 mb-3">
+        <div class="card">
+          <div class="card-body card-height p-5">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">First Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.firstName }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Last Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.lastName }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.email }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Password</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">**********</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Salary</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.salary }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Birthday</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.birthday | date }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Hire Date</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ loggedInAdmin?.hireDate | date }}
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-administrator-editing
+  [currentAdmin]="loggedInAdmin"
+  (administratorHasBeenEdited)="editAdmin($event)"
+></app-administrator-editing>

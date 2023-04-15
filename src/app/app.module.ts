@@ -50,6 +50,7 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
 import { BorrowsComponent } from './borrows/borrows.component';
+import { AdministratorProfileComponent } from './administrator/administrator-profile/administrator-profile.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { BorrowsComponent } from './borrows/borrows.component';
 
     SideBarComponent,
     BorrowsComponent,
+    AdministratorProfileComponent,
   ],
   imports: [
     CommonModule,
