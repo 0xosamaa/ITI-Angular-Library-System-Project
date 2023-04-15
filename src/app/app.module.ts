@@ -55,6 +55,7 @@ import { EditMemberComponent } from './member/edit-member/edit-member.component'
 import { MemberDetailsComponent } from './member/member-details/member-details.component';
 import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
 import { BorrowsComponent } from './borrows/borrows.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { BorrowsComponent } from './borrows/borrows.component';
     MemberDetailsComponent,
     DeleteMemberComponent,
     BorrowsComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
