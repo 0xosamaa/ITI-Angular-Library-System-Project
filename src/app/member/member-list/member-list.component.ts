@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MemberService } from 'src/app/services/member.service';
 import { AddMemberComponent } from '../add-member/add-member.component';
@@ -17,9 +17,13 @@ export class MemberListComponent implements OnInit{
   @ViewChild(DeleteMemberComponent) deleteMember:DeleteMemberComponent | undefined;
 
   members:Member[]=[];
+  memberData:Member;
   errors:string[]=[];
   loading:boolean = false;
-  constructor(private memberService:MemberService){}
+  error:string='';
+  constructor(private memberService:MemberService){
+    this.memberData = new Member();
+  }
 
   ngOnInit(){
     this.memberService.getAllMembers().subscribe(
@@ -28,6 +32,7 @@ export class MemberListComponent implements OnInit{
       },
       (error)=>{
         this.errors.push(error);
+        this.error = 'An error occurred while loading the data. Please try again later.';
       }
     );
   }
@@ -40,6 +45,7 @@ export class MemberListComponent implements OnInit{
       },
       (error)=>{
         this.errors.push(error);
+        this.error = 'An error occurred while loading the data. Please try again later.';
       }
     );
   }
@@ -53,7 +59,8 @@ export class MemberListComponent implements OnInit{
   }
 
   update(member:Member){
-    this.editNewMember?.showForm(member);
+    this.memberData = member;
+    this.editNewMember?.showForm();
   }
 
   details(id:any){

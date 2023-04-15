@@ -55,6 +55,9 @@ import { EditMemberComponent } from './member/edit-member/edit-member.component'
 import { MemberDetailsComponent } from './member/member-details/member-details.component';
 import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
 import { HomeComponent } from './home/home.component';
+
+import { ErrorMessageComponent } from './error-message/error-message.component';
+
 import { BorrowDetailsComponent } from './borrow/borrow-details/borrow-details.component';
 import { BorrowAddingComponent } from './borrow/borrow-adding/borrow-adding.component';
 import { BorrowEditingComponent } from './borrow/borrow-editing/borrow-editing.component';
@@ -94,12 +97,16 @@ import { BorrowComponent } from './borrow/borrow.component';
     MemberDetailsComponent,
     DeleteMemberComponent,
     HomeComponent,
+
+    ErrorMessageComponent,
+
     
     BorrowDetailsComponent,
     BorrowAddingComponent,
     BorrowEditingComponent,
     BorrowListComponent,
     BorrowComponent,
+
   ],
   imports: [
     CommonModule,
