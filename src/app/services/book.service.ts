@@ -7,12 +7,13 @@ import { Book } from './../_models/book';
 })
 export class BookService {
   book: Book = new Book();
-  bookAdded: EventEmitter<Book> = new EventEmitter<Book>();
-  bookUpdated: EventEmitter<Book> = new EventEmitter<Book>();
-  bookUpdatedList: EventEmitter<Book> = new EventEmitter<Book>();
   bookDetails: EventEmitter<Book> = new EventEmitter<Book>();
   showDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
+  bookAdded: EventEmitter<any> = new EventEmitter<any>();
   showUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
+  bookUpdated: EventEmitter<Book> = new EventEmitter<Book>();
+  bookUpdatedList: EventEmitter<Book> = new EventEmitter<Book>();
+  deletedBookId: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     public http: HttpClient,
@@ -56,7 +57,7 @@ export class BookService {
   addBook(book: Book) {
     return this.http.post(this.baseURL + '/books', book).subscribe(
       (data) => {
-        this.bookAdded.emit(book);
+        this.bookAdded.emit(data);
       },
       (error) => {
         console.log(error);

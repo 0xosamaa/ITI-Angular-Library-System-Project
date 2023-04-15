@@ -1,0 +1,66 @@
+<p-dialog header="Header" [(visible)]="flag" [modal]="true" [style]="{ width: '35vw' }" [draggable]="false" [resizable]="false">
+    <form [formGroup]="memberForm" (ngSubmit)="store()">
+
+        <div class="d-flex justify-content-evenly">
+            
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <span class="col-4 col-md-auto field">
+                    <label htmlFor="fullName">Full Name</label><br>
+                    <input pInputText id="fullName" formControlName="fullName" class="d-block"/>
+                    <small class="p-error block" *ngIf="memberForm.get('fullName')?.errors && memberForm.get('fullName')?.dirty">Full Name is Required...</small>
+                </span>
+                <span class="col-8 col-md-auto field">
+                    <label htmlFor="email">Email</label><br>
+                    <input pInputText id="email" formControlName="email" style="width:300px !important" class="d-block"/>
+                    <small class="p-error block" *ngIf="memberForm.get('email')?.errors && memberForm.get('email')?.dirty">Email is Required...</small>
+                </span>
+            </div>
+        </div>
+
+
+        <br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <span class="col-4 col-md-auto field">
+                    <label htmlFor="password">Password</label><br>
+                    <input pInputText id="password" formControlName="password" class="d-block"/>
+                    <small class="p-error block" *ngIf="memberForm.get('password')?.errors && memberForm.get('password')?.dirty">Password is Required...</small>
+                </span>
+                <span class="col-8 col-md-auto">
+                    <label htmlFor="city">Full Address</label><br>
+                    <div class="d-flex flex-row field">
+                        <span class="p-float-label">
+                            <input pInputText id="city" class="p-inputtext-sm d-block" formControlName="city" style="width:100px !important"/>
+                            <label htmlFor="city">City</label>
+                        </span>
+                        <span class="p-float-label field">
+                            <input pInputText id="street" class="p-inputtext-sm d-block" formControlName="street" style="width:100px !important"/>
+                            <label htmlFor="street">Street</label>
+                        </span>
+                        <span class="p-float-label field">
+                            <input pInputText id="building" class="p-inputtext-sm d-block" formControlName="building" style="width:100px !important"/>
+                            <label htmlFor="building">Building</label>
+                        </span>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <br>
+        
+        <div class="d-flex justify-content-center">
+            <span class="d-flex flex-column">
+                <label htmlFor="image">Image</label>
+                <p-fileUpload name="image" url="/api/upload" accept="image/*"
+                              chooseLabel="Select Image" uploadLabel="Upload"
+                              cancelLabel="Cancel" [auto]="false">
+                </p-fileUpload>
+                <!-- maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" -->
+            </span>
+        </div>
+        <hr>
+        <button pButton label="Add" type="submit" icon="pi pi-check" iconPos="right" [disabled]="memberForm.errors"></button>
+    </form>
+</p-dialog>

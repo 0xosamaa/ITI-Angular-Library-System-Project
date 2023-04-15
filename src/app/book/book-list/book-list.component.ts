@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Book } from 'src/app/_models/book';
 import { AddBookComponent } from "../add-book/add-book.component";
+import { DeleteBookComponent } from './../delete-book/delete-book.component';
 
 @Component({
   selector: 'app-book-list',
@@ -16,9 +17,10 @@ import { AddBookComponent } from "../add-book/add-book.component";
   providers: [ConfirmationService, MessageService]
 })
 export class BookListComponent implements OnInit {
-  @ViewChild(UpdateBookComponent) updateBook: UpdateBookComponent | undefined;
-  @ViewChild(AddBookComponent) addBook: AddBookComponent | undefined;
   @ViewChild(BookDetailsComponent) bookDetails: BookDetailsComponent | undefined;
+  @ViewChild(AddBookComponent) addBook: AddBookComponent | undefined;
+  @ViewChild(UpdateBookComponent) updateBook: UpdateBookComponent | undefined;
+  @ViewChild(DeleteBookComponent) deleteBook: DeleteBookComponent | undefined;
   loading: boolean = true;
   books: Book[] = [];
   book: Book = new Book();
@@ -33,8 +35,8 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.loading = false;
     this.getBooks();
-    this.bookService.bookAdded.subscribe((book: Book) => {
-      this.books.push(book);
+    this.bookService.bookAdded.subscribe((data: any) => {
+      this.books.push(data.book);
     });
     this.bookService.bookUpdatedList.subscribe((book: Book) => {
       for(let i = 0; i < this.books.length; i++) {
@@ -44,6 +46,14 @@ export class BookListComponent implements OnInit {
         }
       }
     });
+    this.bookService.deletedBookId.subscribe((id: string) => {
+      for(let i = 0; i < this.books.length; i++) {
+        if (this.books[i]._id === id) {
+          this.books.splice(i, 1);
+          break;
+        }
+      }
+    })
   }
 
   private getBooks(): void {
@@ -77,40 +87,7 @@ export class BookListComponent implements OnInit {
     this.updateBook?.showUpdateDialog(id);
   }
 
-  deleteDialog(_id: string) {
-    this.confirmationService.confirm({
-      message: 'Are you sure to delete book?',
-      header: 'Delete Book',
-      icon: 'pi pi-info-circle',
-      accept: () => {
-        this.bookService.deleteBook(_id).subscribe(
-          (data:any) => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Book deleted successfully' });
-            this.bookService.getBooks().subscribe(
-              (data:any) => {
-                this.books = data.books;
-              },
-              (error:any) => {
-                console.log(error.error.message);
-              }
-            );
-          },
-          (error) => {
-            console.log(error.error.message);
-          }
-        );
-      },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'Book Deletion rejected' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'Book Deletion cancelled' });
-            break;
-        }
-      }
-    });
-    this.getBooks();
+  deleteDialog(id: string) {
+    this.deleteBook?.showDeleteDialog(id);
   }
 }
