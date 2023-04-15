@@ -11,6 +11,7 @@ import { AdministratorComponent } from './administrator/administrator.component'
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BorrowsComponent } from "./borrows/borrows.component";
 import { MemberListComponent } from './member/member-list/member-list.component';
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [ProfileGuard],
   },
-  { path: '', component: TestComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'administrators',
     component: AdministratorComponent,
@@ -40,7 +41,8 @@ const routes: Routes = [
     component: BorrowsComponent,
     // canActivate: [AdminGuardGuard],
   },
-  {path: 'members', component: MemberListComponent}
+  {path: 'members', component: MemberListComponent},
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({
