@@ -8,8 +8,8 @@
     [loading]="loading"
     [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['fullName','email','phoneNumber','address','isBanned','created_at','image']"
-    [tableStyle]="{ 'min-width': '75rem' }"
+    [globalFilterFields]="['fullName','email','isBanned','created_at']"
+    [tableStyle]="{ 'min-width': '50rem' }"
     >
     <ng-template pTemplate="caption">
         <div class="flex">
@@ -23,11 +23,8 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Address</th>
-            <th class="text-center">Phone Number</th>
             <th class="text-center">Banned</th>
             <th class="text-center">Created&nbsp;At</th>
-            <th class="text-center">Image</th>
             <th class="text-center">Operations</th>
         </tr>
         <!-- <tr>
@@ -72,37 +69,23 @@
             <td >
                 {{ member.fullName }}
             </td>
+
             <td>
                 {{ member.email }}
-            </td>
-
-            <td *ngIf="!member.fullAddress">
-                <small class="text-yellow">No Address</small>
-            </td>
-            <td *ngIf="member.fullAddress">
-                {{ member.fullAddress.building }},{{ member.fullAddress.street }},{{ member.fullAddress.city }}
-            </td>
-
-             <td *ngIf="!member.phoneNumber" class="text-center">
-                <small class="text-yellow">No Phone Number</small>
-            </td>
-            <td *ngIf="member.phoneNumber">
-                {{ member.phoneNumber }}
             </td>
 
             <td class="text-center">
                 <i class="pi" [ngClass]="{ 'text-green pi-check-circle': member.isBanned, 'text-red pi-times-circle': !member.isBanned }"></i>
             </td>
+            
             <td class="text-center">
                 {{ member.createdAt | date}}
             </td>
-            <td class="text-center">
-                <img src="{{ member.image }}" alt="no image" style="width: 70px;border-radius: 50%;">
-            </td>
+
             <td class="d-flex justify-content-center">
                 <p-button  (click)="details(member._id)" icon="pi pi-external-link" class="m-2" styleClass="p-button-rounded p-button-text p-button-raised"></p-button>
-                <p-button  icon="pi pi-pencil" styleClass="p-button-success p-button-rounded p-button-text p-button-raised" class="m-2"></p-button> <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="updateDialog(book._id)" -->
-                <p-button  (click)="deleteSingleMember(member._id)" icon="pi pi-trash" styleClass="p-button-danger p-button-rounded p-button-text p-button-raised" class="m-2"></p-button>  <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="deleteDialog(book._id)" -->
+                <p-button  (click)="update(member)" icon="pi pi-pencil" styleClass="p-button-success p-button-rounded p-button-text p-button-raised" class="m-2"></p-button> <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="updateDialog(book._id)" -->
+                <p-button  (click)="deleteSingleMember(member._id)" icon="pi pi-trash" styleClass="p-button-danger p-button-rounded p-button-text p-button-raised" class="m-2"></p-button>  <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" (click)="deleteDialog(book._id)"   -->     
             </td>
         </tr>
     </ng-template>
@@ -113,7 +96,7 @@
     </ng-template>
 </p-table>
 
-<p-button id="add-btn" (click)="addForm()" label="+" styleClass="p-button-rounded" style="position:fixed; right:50px; bottom: 25px;"></p-button>  
+<p-button id="add-btn" (click)="addForm()" label="+" styleClass="p-button-rounded"></p-button>  
 <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" -->
 
 <app-add-member></app-add-member>
