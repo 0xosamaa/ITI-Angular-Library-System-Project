@@ -1,0 +1,168 @@
+<form [formGroup]="editFormGroup">
+  <p-dialog
+    header="Edit Borrow"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '75vw' }"
+  >
+    <div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label">Book ID</label>
+          <input
+            type="text"
+            [class.is-valid]="!editFormGroup.get('bookID')?.errors"
+            class="form-control"
+            formControlName="bookID"
+          />
+          <div
+            [hidden]="
+              editFormGroup.get('bookID')?.valid ||
+              editFormGroup.get('bookID')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('bookID')?.errors?.['required']"
+              ><li class="mt-2">Book ID Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('bookID')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label class="form-label">Employee ID</label>
+          <input
+            type="text"
+            [class.is-valid]="!editFormGroup.get('employeeID')?.errors"
+            class="form-control"
+            formControlName="employeeID"
+          />
+          <div
+            [hidden]="
+              editFormGroup.get('employeeID')?.valid ||
+              editFormGroup.get('employeeID')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('employeeID')?.errors?.['required']"
+              ><li class="mt-2">Employee ID Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('employeeID')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label">Member ID</label>
+          <input
+            type="text"
+            [class.is-valid]="!editFormGroup.get('memberID')?.errors"
+            class="form-control"
+            formControlName="memberID"
+          />
+          <div
+            [hidden]="
+              editFormGroup.get('memberID')?.valid ||
+              editFormGroup.get('memberID')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('memberID')?.errors?.['required']"
+              ><li class="mt-2">Member ID Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('memberID')?.errors?.['minLength']"
+              ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-4">
+          <label for="template" class="col-12 my-2">Return Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="returnDate"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              editFormGroup.get('returnDate')?.valid ||
+              editFormGroup.get('returnDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('returnDate')?.errors?.['required']"
+              ><li class="mt-2">Return Date Is Required</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-4">
+          <label for="template" class="col-12 my-2">Borrow Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="borrowDate"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              editFormGroup.get('borrowDate')?.valid ||
+              editFormGroup.get('borrowDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('borrowDate')?.errors?.['required']"
+              ><li class="mt-2">Borrow Date Is Required</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-4">
+          <label for="template" class="col-12 my-2">Deadline Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="deadlineDate"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              editFormGroup.get('deadlineDate')?.valid ||
+              editFormGroup.get('deadlineDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="editFormGroup.get('deadlineDate')?.errors?.['required']"
+              ><li class="mt-2">Deadline Date Is Required</li></small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        [disabled]="editFormGroup.invalid"
+        (onClick)="editBorrow()"
+        icon="pi pi-check"
+        label="Edit"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>

@@ -1,0 +1,44 @@
+<!-- heloo -->
+<p-dialog
+  header="Borrow Details"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ maxWidth: '600px', width: '100%', margin: '20px' }"
+>
+  <div class="table-responsive">
+    <div class="table-responsive">
+      <table class="table table-hover table-border align-middle">
+        <tbody>
+          <tr>
+            <th>Borrow ID</th>
+            <td>{{ currentBorrow?._id }}</td>
+          </tr>
+          <tr>
+            <th>Book ID</th>
+            <td>{{ currentBorrow?.bookID }}</td>
+          </tr>
+          <tr>
+            <th>Employee ID</th>
+            <td>{{ currentBorrow?.employeeID }}</td>
+          </tr>
+          <tr>
+            <th>Member ID</th>
+            <td>{{ currentBorrow?.memberID }}</td>
+          </tr>
+          <tr>
+            <th>Borrow Date</th>
+            <td>{{ currentBorrow?.borrowDate }}</td>
+          </tr>
+          <tr>
+            <th>Return Date</th>
+            <td>{{ currentBorrow?.returnDate?? 'Not Returned' }}</td>
+          </tr>
+          <tr>
+            <th>Deadline Date</th>
+            <td>{{ currentBorrow?.deadlineDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</p-dialog>
