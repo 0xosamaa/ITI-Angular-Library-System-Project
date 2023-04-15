@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,14 +10,19 @@ import { MemberService } from 'src/app/services/member.service';
   templateUrl: './edit-member.component.html',
   styleUrls: ['./edit-member.component.css']
 })
-export class EditMemberComponent{
+export class EditMemberComponent implements OnChanges{
 
+  message:EventEmitter<string> = new EventEmitter<string>;
   flag:boolean = false;
-  @Input() memberData:Member | null = null;
+  @Input() memberData?:Member;
   memberEditForm:FormGroup;
   isEditing = false;
 
-  constructor(private formBuilder:FormBuilder, private memberService:MemberService, private router:Router){
+  constructor(
+    private formBuilder:FormBuilder, 
+    private memberService:MemberService, 
+    private router:Router, 
+    ){
     this.memberEditForm = this.formBuilder.group({
       fullName: ['',[Validators.required, Validators.minLength(3)]],
       email: ['',[Validators.required, Validators.email]],
@@ -29,12 +34,10 @@ export class EditMemberComponent{
 
   
   ngOnChanges(): void {
-    console.log("test on change...")
     if (this.memberData) {
       let oldDate = this.memberData.birthDate || '';
       let dateFormat = new Date(oldDate);
-      console.log(dateFormat)
-      this.memberEditForm.setValue({
+      this.memberEditForm.patchValue({
         fullName: this.memberData.fullName,
         email: this.memberData.email,
         birthDate: dateFormat,
@@ -50,11 +53,9 @@ export class EditMemberComponent{
 
   showForm(){
     this.flag = true;
-    // this.memberData = member;
-    console.log(this.memberData);
   }
 
-  update(){
+  update(){  
     if (this.memberEditForm.valid) {
       this.flag = false;
       let memberNewData = new FormData();
@@ -62,21 +63,27 @@ export class EditMemberComponent{
       memberNewData.append('fullName', this.memberEditForm.get('fullName')?.value);
       memberNewData.append('email', this.memberEditForm.get('email')?.value);
       
-      if(this.memberEditForm.get('phoneNumber') !== undefined){
+      if(this.memberEditForm.get('phoneNumber')?.value != null){
         const phoneNumberString = this.memberEditForm.get('phoneNumber')?.value.toString();
         const phoneNumberDigitsOnly = phoneNumberString.replace(/\D/g, '');
 
         memberNewData.append('phoneNumber', phoneNumberDigitsOnly);
       }
-      if(this.memberEditForm.get('birthDate') !== undefined){
+      if(this.memberEditForm.get('birthDate')?.value !== undefined){
         memberNewData.append('birthDate', this.memberEditForm.get('birthDate')?.value.toISOString());
       }
-      if(this.memberEditForm.get('image') !== undefined){
+      if(this.memberEditForm.get('image')?.value !== undefined){
         memberNewData.append('image', this.memberEditForm.get('image')?.value);
       }
 
-      this.memberService.updateMember(memberNewData);
-      this.router.navigate(["/members"]);
+      this.memberService.updateMember(memberNewData).subscribe(
+        (res)=>{
+          console.log(res);
+        },
+        (error)=>{
+        }
+      );
+      // this.router.navigate(["/members"]);
     }else {
       // show error messages
       Object.keys(this.memberEditForm.controls).forEach(field => {

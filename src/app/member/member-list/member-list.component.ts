@@ -18,7 +18,7 @@ export class MemberListComponent implements OnInit{
 
   members:Member[]=[];
   memberData:Member;
-  errors:string[]=[];
+  message:string='';
   loading:boolean = false;
   error:string='';
   constructor(private memberService:MemberService){
@@ -31,8 +31,7 @@ export class MemberListComponent implements OnInit{
         this.members = data.data;
       },
       (error)=>{
-        this.errors.push(error);
-        this.error = 'An error occurred while loading the data. Please try again later.';
+        this.message = 'An error occurred while loading the data. Please try again later.';
       }
     );
   }
@@ -41,11 +40,9 @@ export class MemberListComponent implements OnInit{
     this.memberService.getAllMembers().subscribe(
       (data:any)=>{
         this.members = data.data;
-        console.log(this.members)
       },
       (error)=>{
-        this.errors.push(error);
-        this.error = 'An error occurred while loading the data. Please try again later.';
+        this.message = 'An error occurred while loading the data. Please try again later.';
       }
     );
   }

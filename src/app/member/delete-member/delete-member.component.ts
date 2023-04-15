@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
 import { ConfirmEventType, MessageService } from 'primeng/api';
@@ -11,7 +11,7 @@ import { ConfirmationService } from 'primeng/api';
   providers: [ConfirmationService, MessageService],
 })
 export class DeleteMemberComponent {
-  error:string='';
+  @Output() delMessage:EventEmitter<string> = new EventEmitter<string>();
   constructor(
     private memberService:MemberService, 
     private route:Router,
@@ -19,14 +19,14 @@ export class DeleteMemberComponent {
     private messageService: MessageService
   ){}
   
-  destroy(id:any){
+  destroy(_id:any){
     
     this.confirmationService.confirm({
       message: 'Are you sure to delete book?',
       header: 'Delete Book',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.memberService.deleteMember(id).subscribe(
+        this.memberService.deleteMember(_id).subscribe(
           (res)=>{
             console.log(res);
             this.messageService.add({
@@ -34,12 +34,13 @@ export class DeleteMemberComponent {
               summary: 'Confirmed',
               detail: 'Record Deleted Successfully.',
             });
-
-            this.route.navigate(['/members']);
           },
           (error)=>{
-            console.log(error);
-            this.error = 'Error occured while deleting this member...';
+            this.messageService.add({
+              severity: 'info',
+              summary: 'Rejected',
+              detail: error.error.message,
+            });
           }
         )
       },

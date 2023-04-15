@@ -22,6 +22,5 @@ export class MemberDetailsComponent implements OnInit{
   showMemberDetials(id:string){
     this.flag = true;
     this.memberService.getMember(id);
-    console.log(this.memberDetails);
   }
 }
