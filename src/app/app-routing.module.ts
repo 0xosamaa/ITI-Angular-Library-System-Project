@@ -9,7 +9,7 @@ import { EmpGuardGuard } from './guards/emp-guard.guard';
 import { ProfileGuard } from './guards/profile.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BookListComponent } from './book/book-list/book-list.component';
-import { BorrowsComponent } from "./borrows/borrows.component";
+import { BorrowComponent } from "./borrow/borrow.component";
 import { MemberListComponent } from './member/member-list/member-list.component';
 
 const routes: Routes = [
@@ -37,8 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'borrows',
-    component: BorrowsComponent,
-    // canActivate: [AdminGuardGuard],
+    component: BorrowComponent,
+    canActivate: [EmpGuardGuard],
   },
   {path: 'members', component: MemberListComponent}
 ];
