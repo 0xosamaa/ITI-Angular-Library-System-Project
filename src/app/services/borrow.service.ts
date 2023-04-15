@@ -11,13 +11,26 @@ export class BorrowService {
     @Inject('baseURL') public baseURL: string
   ) {}
 
-  getBorrows() {
-    return this.http.get(`${this.baseURL}/borrows`, {
-      headers: {
-        Authorization:
-          'BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE2ODExMjAxOTMsImV4cCI6MTY4MTE0ODk5M30.m1-PrGVGzeYIW7T9a3pSHc-TlyXazz12t7JEO5_sX2M',
-      },
-    });
+  getAllBorrows() {
+    return this.http.get(`${this.baseURL}/borrows`);
+  }
+
+  getBorrow(id: string) {
+    return this.http.get(`${this.baseURL}/borrows/${id}`);
+  }
+
+  addBorrow(formData: FormData) {
+    return this.http.post(`${this.baseURL}/borrows`, formData);
+  }
+
+  updateBorrow(formData: FormData) {
+    return this.http.patch(
+      `${this.baseURL}/borrows/${formData.get('_id')}`,
+      formData
+    );
+  }
+
+  deleteBorrow(id: string) {
+    return this.http.delete(`${this.baseURL}/administrators/${id}`);
   }
 }
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE2ODExMjAxOTMsImV4cCI6MTY4MTE0ODk5M30.m1-PrGVGzeYIW7T9a3pSHc-TlyXazz12t7JEO5_sX2M

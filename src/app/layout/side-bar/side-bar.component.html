@@ -146,7 +146,7 @@
   <!-- Brand Logo -->
   <a href="/home" class="brand-link">
     <img src="assets/dragon2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Liberary System</span>
+    <span class="brand-text font-weight-light">Library System</span>
   </a>
 
   <!-- Sidebar -->
@@ -211,7 +211,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/employees" class="nav-link">
+              <a routerLink="/employees" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>All Employees</p>
               </a>
@@ -223,15 +223,27 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/administrators" class="nav-link">
+              <a routerLink="/administrators" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>All Admins</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/administrators" class="nav-link">
+              <a routerLink="/administrators" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>All Books</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/members" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>Members</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/borrows" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>Borrows</p>
               </a>
             </li>
           </ul>
@@ -264,6 +276,12 @@
                 <p>Books</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a routerLink="/borrows" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>Borrows</p>
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -287,7 +305,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="borrows" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>
                 <p>Lend Books</p>
               </a>

@@ -114,6 +114,17 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
+  updateData() {
+    this.empService.getEmployees().subscribe(
+      (data: any) => {
+        this.employees = data.data;
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    );
+  }
+
   clear(table: Table) {
     table.clear();
   }

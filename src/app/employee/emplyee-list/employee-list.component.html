@@ -68,7 +68,7 @@
         <td style="display: flex; gap: 10px">
           <p-button  (click)="showDialog(employee)" icon="pi pi-external-link" styleClass="p-button-secondary" label=""></p-button>
           <p-button  (click)="updateDialog(employee)" icon="pi pi-pencil" styleClass="p-button-success" label=""></p-button>
-          <p-button (click)="confirm(employee._id)" icon="pi pi-trash" label="" class="p-button-danger"></p-button>
+          <p-button (click)="confirm(employee._id)" icon="pi pi-trash " label="" class="p-button-danger"></p-button>
         </td>
 
 
@@ -131,7 +131,7 @@
     <h1>+</h1>
   </div>
 
-  <app-update [employee]="employee" user="admin" ></app-update>
-  <app-add-employee></app-add-employee>
+  <app-update [employee]="employee" (updated)="updateData()" user="admin" ></app-update>
+  <app-add-employee (Added)="updateData()"></app-add-employee>
 
 </div>
