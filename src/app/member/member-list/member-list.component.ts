@@ -4,36 +4,44 @@ import { MemberService } from 'src/app/services/member.service';
 import { AddMemberComponent } from '../add-member/add-member.component';
 import { MemberDetailsComponent } from '../member-details/member-details.component';
 import { DeleteMemberComponent } from '../delete-member/delete-member.component';
-import { ConfirmEventType, MessageService } from 'primeng/api';
-import { ConfirmationService } from 'primeng/api';
- 
+import { EditMemberComponent } from '../edit-member/edit-member.component';
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css'],
-  providers: [ConfirmationService, MessageService]
 })
 export class MemberListComponent implements OnInit{
   @ViewChild(AddMemberComponent) addNewMember:AddMemberComponent | undefined;
+  @ViewChild(EditMemberComponent) editNewMember:EditMemberComponent | undefined;
   @ViewChild(MemberDetailsComponent) memberDetails:MemberDetailsComponent | undefined;
   @ViewChild(DeleteMemberComponent) deleteMember:DeleteMemberComponent | undefined;
 
   members:Member[]=[];
+  errors:string[]=[];
   loading:boolean = false;
-  constructor(public memberService:MemberService,public confirmationService:ConfirmationService, public messageService: MessageService){}
+  constructor(private memberService:MemberService){}
 
   ngOnInit(){
-    this.memberService.getAllMembers().subscribe((data:any)=>{
-      this.members = data.data;
-      console.log(this.members)
-    })
+    this.memberService.getAllMembers().subscribe(
+      (data:any)=>{
+        this.members = data.data;
+      },
+      (error)=>{
+        this.errors.push(error);
+      }
+    );
   }
 
   ngOnChange(){
-    this.memberService.getAllMembers().subscribe((data:any)=>{
-      this.members = data.data;
-      console.log(this.members)
-    })
+    this.memberService.getAllMembers().subscribe(
+      (data:any)=>{
+        this.members = data.data;
+        console.log(this.members)
+      },
+      (error)=>{
+        this.errors.push(error);
+      }
+    );
   }
 
   addForm(){
@@ -44,22 +52,16 @@ export class MemberListComponent implements OnInit{
     this.addNewMember?.store();
   }
 
-  details(id:string){
+  update(member:Member){
+    this.editNewMember?.showForm(member);
+  }
+
+  details(id:any){
     this.memberDetails?.showMemberDetials(id);
   }
 
-  deleteSingleMember(id:string){
-    this.deleteMember?.showConfirm();
-      // this.confirmationService.confirm({
-      //   message: 'Are you sure to delete book?',
-      //   header: 'Delete Book',
-      //   icon: 'pi pi-info-circle',
-      //   accept: () => {
-      //     this.deleteMember?.deleteMember(id);
-      //   },
-      //   reject: (type: any) => {
-      //   }
-      // });
+  deleteSingleMember(id:any){
+    this.deleteMember?.destroy(id);
   }
 
 

@@ -28,7 +28,7 @@ export class MemberService {
     );
   }
 
-  addMember(member:Member){
+  addMember(member:FormData){
     return this.http.post(this.baseURL+"/members", member).subscribe(
       (res)=>{
         console.log(res);
@@ -41,17 +41,9 @@ export class MemberService {
 
   deleteMember(id:string){
     return this.http.delete(this.baseURL+`/members/${id}`)
-    // .subscribe(
-    //   (res)=>{
-    //     console.log(res);
-    //   },
-    //   (error)=>{
-    //     console.log(error);
-    //   }
-    // )
   }
 
-  updateMember(id:string, member:Member){
+  updateMember(member:FormData){
     return this.http.put(this.baseURL+"/members", member).subscribe(
       (res)=>{
         console.log(res);

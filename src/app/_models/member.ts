@@ -1,7 +1,7 @@
 export interface Address{
-    city:string,
-    street:string,
-    building:string
+    city?:string,
+    street?:string,
+    building?:string
 }
 export class Member {
     constructor(

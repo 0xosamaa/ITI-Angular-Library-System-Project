@@ -1,1 +1,50 @@
-<p>edit-member works!</p>
+<p-dialog header="Update Member's Info" [(visible)]="flag" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <form [formGroup]="memberForm" (ngSubmit)="update()">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <span class="mb-3 field">
+                    <label htmlFor="fullName">Full Name</label><br>
+                    <input pInputText id="fullName" formControlName="fullName" class="form-control" [value]="oldData.fullName"/>
+                    <small class="p-error block" *ngIf="memberForm.get('fullName')?.errors && memberForm.get('fullName')?.dirty">Full Name is Required...</small>
+                </span>
+                <!-- <span class="col-6 mb-3 field">
+                    <label htmlFor="password">Password</label><br>
+                    <input pInputText id="password" formControlName="password" class="form-control w-100"/>
+                    <small class="p-error block" *ngIf="memberForm.get('password')?.errors && memberForm.get('password')?.dirty">Password is Required...</small>
+                </span> -->
+            </div>
+            
+            <div class="row justify-content-center">
+                <span class="mb-3 field">
+                    <label htmlFor="email">Email</label><br>
+                    <input pInputText id="email" formControlName="email" class="form-control" [value]="oldData.email"/>
+                    <small class="p-error block" *ngIf="memberForm.get('email')?.errors && memberForm.get('email')?.dirty">Email is Required...</small>
+                </span>
+            </div>
+
+            <div class="row justify-content-center">
+                <span class="col-6 mb-3 field">
+                    <label htmlFor="phoneNumber">Phone Number <small class="text-danger">*</small></label><br>
+                    <input pInputText id="phoneNumber" formControlName="phoneNumber" class="form-control" [value]="oldData.phoneNumber"/>
+                    <small class="p-error block" *ngIf="memberForm.get('phoneNumber')?.errors && memberForm.get('phoneNumber')?.dirty">phoneNumber is Required...</small>
+                </span>
+                <span class="col-6 mb-3 field">
+                    <label htmlFor="birthDate">Birth Date</label><br>
+                    <p-calendar styleClass="input-styling col-6 form-control" [touchUI]="true" formControlName="birthDate" appendTo="body"></p-calendar>
+                    <small class="p-error block" *ngIf="memberForm.get('birthDate')?.errors && memberForm.get('birthDate')?.dirty">birthDate is Required...</small>
+                </span>
+            </div>
+
+            <div class="row justify-content-center">
+                <span class="mb-3 field">
+                    <label for="formFile" class="form-label">Upload Image: <small class="text-danger">*</small></label>
+                    <input class="form-control" type="file" formControlName="image" accept="image/*"/>
+                </span>
+            </div>
+        </div>
+
+        <hr>
+        <button pButton label="Update" type="submit" icon="pi pi-check" iconPos="right" [disabled]="memberForm.errors"></button>
+    </form>
+</p-dialog>
