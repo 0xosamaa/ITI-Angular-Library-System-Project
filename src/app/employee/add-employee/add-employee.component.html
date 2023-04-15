@@ -1,38 +1,213 @@
-<p-dialog  header="Employee Information" [(visible)]="visible" [modal]="true" [style]="{width: '80vw' , height: '75vh'}">
-  <div class="cont">
-
-    <div class="info-card">
-      <label>First Name : </label>
-      <input pInputText   placeholder="First Name" [(ngModel)]="employee.firstName" />
+<form [formGroup]="addFormGroup">
+  <p-dialog
+    header="New Employee"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '75vw' }"
+  >
+    <div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            [class.is-valid]="!addFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('firstName')?.valid ||
+              addFormGroup.get('firstName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('firstName')?.errors?.['required']"
+            ><li class="mt-2">First Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('firstName')?.errors?.['minLength']"
+            ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            [class.is-valid]="!addFormGroup.get('firstName')?.errors"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('lastName')?.valid ||
+              addFormGroup.get('lastName')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('lastName')?.errors?.['required']"
+            ><li class="mt-2">Last Name Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('lastName')?.errors?.['minLength']"
+            ><li class="mt-2">Minimum Length is 2 Characters</li></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            [class.is-valid]="!addFormGroup.get('email')?.errors"
+            class="form-control"
+            formControlName="email"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('email')?.valid ||
+              addFormGroup.get('email')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['required']"
+            ><li class="mt-2">Email Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['email']"
+            ><li class="mt-2">The pattern needs to be for email</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('email')?.errors?.['duplication']"
+            ><li class="mt-2">Email can't be duplicated</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            [class.is-valid]="!addFormGroup.get('password')?.errors"
+            class="form-control"
+            formControlName="password"
+          />
+          <div
+            [hidden]="
+              addFormGroup.get('password')?.valid ||
+              addFormGroup.get('password')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('password')?.errors?.['required']"
+            ><li class="mt-2">Password Is Required</li></small
+            >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('password')?.errors?.['minLength']"
+            ><li class="mt-2">Minimum Length is 9 Characters</li></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Hire Date</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="hireDate"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              addFormGroup.get('hireDate')?.valid ||
+              addFormGroup.get('hireDate')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('hireDate')?.errors?.['required']"
+            ><li class="mt-2">Hire Date Is Required</li></small
+            >
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="template" class="col-12 my-2">Birthday</label>
+          <p-calendar
+            styleClass="input-styling col-6"
+            [touchUI]="true"
+            formControlName="birthday"
+            appendTo="body"
+          ></p-calendar>
+          <div
+            [hidden]="
+              addFormGroup.get('birthday')?.valid ||
+              addFormGroup.get('birthday')?.untouched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addFormGroup.get('birthday')?.errors?.['required']"
+            ><li class="mt-2">Birthday Is Required</li></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="salary" class="form-label">Salary</label>
+        <input
+          type="text"
+          [class.is-valid]="!addFormGroup.get('salary')?.errors"
+          class="form-control"
+          formControlName="salary"
+        />
+        <div
+          [hidden]="
+            addFormGroup.get('salary')?.valid ||
+            addFormGroup.get('salary')?.untouched
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="addFormGroup.get('salary')?.errors?.['required']"
+          ><li class="mt-2">Salary Is Required</li></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="addFormGroup.get('salary')?.errors?.['type']"
+          ><li class="mt-2">Salary must be a number</li></small
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Upload Image : </label>
+        <input
+          class="form-control"
+          type="file"
+          formControlName="image"
+          (change)="uploadImage($event)"
+          accept="image/*"
+        />
+      </div>
     </div>
-    <div class="info-card">
-      <label>HireDate : </label>
-      <p-calendar styleClass="p-calendar-w-btn" [(ngModel)]="hireDate"></p-calendar>
-    </div>
-    <div class="info-card">
-      <label>Last Name : </label>
-      <input pInputText   placeholder="Last Name" [(ngModel)]="employee.lastName" />
-    </div>
-    <div class="info-card">
-      <label>BirthDate : </label>
-      <p-calendar [(ngModel)]="birthDate"></p-calendar>
-    </div>
-    <div class="info-card">
-      <label>Email : </label>
-      <input pInputText   placeholder="Email" [(ngModel)]="employee.email" />
-    </div>
-    <div class="info-card">
-      <label>Salary : </label>
-      <input pInputText   placeholder="Salary" [(ngModel)]="employee.salary" />
-    </div>
-    <div class="info-card">
-      <label>Password : </label>
-      <p-password  placeholder="Password" [(ngModel)]="employee.password" />
-    </div>
-    <div class="info-card">
-      <label>settings : </label>
-      <p-dropdown [options]="settings" [(ngModel)]="setting" optionLabel="name"></p-dropdown>
-    </div>
-    <p-button class="button"   (click)="save()" styleClass="p-button-primary p-button-lg" label="Add"></p-button>
-  </div>
-</p-dialog>
+    <ng-template pTemplate="footer">
+      <p-button
+        [disabled]="addFormGroup.invalid"
+        (onClick)="save()"
+        icon="pi pi-check"
+        label="Add"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>
