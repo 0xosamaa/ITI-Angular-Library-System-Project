@@ -23,7 +23,6 @@ export class WorkerLoginComponent {
   login() {
     if (this.setting.code == 'admin') {
       this.authService.loginAdmin(this.worker).subscribe((data: any) => {
-        console.log(data);
         this.authService.isLoggedIn = true;
         if (data.data.email == 'BasicAdmin@Library.Co') {
           this.authService.role = 'basicAdmin';
@@ -38,6 +37,8 @@ export class WorkerLoginComponent {
         localStorage.setItem('settings', data.data.settings || 'manual');
         localStorage.setItem('data', JSON.stringify(data.data));
         this.authService.data = data.data;
+        console.log('------------------------------');
+        this.router.navigateByUrl('administrators/profile');
       });
     } else if (this.setting.code == 'employee') {
       this.authService.loginEmployee(this.worker).subscribe((data: any) => {

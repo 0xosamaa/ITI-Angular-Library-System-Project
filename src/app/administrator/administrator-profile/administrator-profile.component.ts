@@ -22,6 +22,9 @@ export class AdministratorProfileComponent implements OnInit {
     this.adminService.getAdministrator(id!).subscribe({
       next: (data: any) => {
         this.loggedInAdmin = data.data[0];
+        console.log(this.loggedInAdmin?.image.split('\\')[6]);
+        this.loggedInAdmin!.image =
+          this.loggedInAdmin?.image.split('\\')[6] || '';
       },
       error: (error: any) => {
         console.log(error);
