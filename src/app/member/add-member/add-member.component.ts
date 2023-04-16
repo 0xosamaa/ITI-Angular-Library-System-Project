@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class AddMemberComponent {
   flag:boolean = false;
   memberForm:FormGroup;
   error:string='';
+  @Output() memberAdded:EventEmitter<Member> = new EventEmitter<Member>();
 
   constructor(private formBuilder:FormBuilder, private memberService:MemberService, private router:Router){
     this.memberForm = this.formBuilder.group({
@@ -33,7 +34,6 @@ export class AddMemberComponent {
 
   store(){
     if (this.memberForm.valid) {
-      this.flag = false;
       let memberData = new FormData();
       memberData.append('fullName', this.memberForm.get('fullName')?.value);
       memberData.append('password', this.memberForm.get('password')?.value);
@@ -54,11 +54,66 @@ export class AddMemberComponent {
 
       this.memberService.addMember(memberData).subscribe(
         (res)=>{
-          console.log(res);
+          let newMember:Member = this.memberForm.value;
+          this.memberAdded.emit(newMember);
+          this.flag = false;
         },
         (error)=>{
           console.log(error);
-          this.error = 'Error occured while adding this new member...';
+          // this.error = 'Error occured while adding this new member...';
+          let errorMessage = error.error.message;
+          if(errorMessage.includes('FullName Field Required...!')){
+            this.memberForm.controls['fullName'].setErrors({
+              required: true,
+            })
+          }
+
+          if(errorMessage.includes('FullName must be string')){
+            this.memberForm.controls['fullName'].setErrors({
+              type: "FullName must be of type string...",
+            })
+          }
+          /************* FullName Field Validation **************/
+
+          if(errorMessage.includes('Email Required...!')){
+            this.memberForm.controls['email'].setErrors({
+              required: true
+            })
+          }
+
+          if(errorMessage.includes("Email must be in email format 'example@example.com'...!")){
+            this.memberForm.controls['email'].setErrors({
+              type: "Email must be in email format 'example@example.com'...!"
+            })
+          }
+          /************* Email Field Validation **************/
+
+          if(errorMessage.includes("Password Required...!")){
+            this.memberForm.controls['password'].setErrors({
+              required: true
+            })
+          }
+
+          if(errorMessage.includes("Password must be at least 8 chars, starts with capital char...!")){
+            this.memberForm.controls['password'].setErrors({
+              type: 'Password must be strong [starts with capital char, contains symblos and numbers]'
+            })
+          }
+          /************* Password Field Validation **************/
+
+          if(errorMessage.includes("Phone Number must be numbers only 'it must be a real mobile number'...!")){
+            this.memberForm.controls['phoneNumber'].setErrors({
+              type: 'Phone Number must be in mobile num format'
+            })
+          }
+          /************* Phone Number Field Validation **************/
+
+          if(errorMessage.includes("BirthDate must be in date format...!")){
+            this.memberForm.controls['birthDate'].setErrors({
+              type: 'Birth Date must be in Date format'
+            })
+          }
+          /************* Birth Date Field Validation **************/
         }
       );
       this.router.navigate(["/members"]);

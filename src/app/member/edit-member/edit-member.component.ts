@@ -12,7 +12,7 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class EditMemberComponent implements OnChanges{
 
-  message:EventEmitter<string> = new EventEmitter<string>;
+  memberUpdated:EventEmitter<Member> = new EventEmitter<Member>;
   flag:boolean = false;
   @Input() memberData?:Member;
   memberEditForm:FormGroup;
@@ -79,11 +79,12 @@ export class EditMemberComponent implements OnChanges{
       this.memberService.updateMember(memberNewData).subscribe(
         (res)=>{
           console.log(res);
+          let newMemberData:Member = this.memberEditForm.value;
+          this.memberUpdated.emit(newMemberData);
         },
         (error)=>{
         }
       );
-      // this.router.navigate(["/members"]);
     }else {
       // show error messages
       Object.keys(this.memberEditForm.controls).forEach(field => {

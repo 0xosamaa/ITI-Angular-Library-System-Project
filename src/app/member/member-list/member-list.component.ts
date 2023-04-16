@@ -68,5 +68,18 @@ export class MemberListComponent implements OnInit{
     this.deleteMember?.destroy(id);
   }
 
+  updateList(member:any, operationFlag:number){
+    switch(operationFlag){
+      case 1:
+        this.members.push(member);
+        break;
+      case 2:
+        this.ngOnInit();
+        break;
+      case 3:
+        this.ngOnInit();
+    }
+  }
+
 
 }

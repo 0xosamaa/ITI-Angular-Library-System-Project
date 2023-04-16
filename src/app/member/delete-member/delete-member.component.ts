@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
 import { ConfirmEventType, MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-delete-member',
@@ -11,7 +12,7 @@ import { ConfirmationService } from 'primeng/api';
   providers: [ConfirmationService, MessageService],
 })
 export class DeleteMemberComponent {
-  @Output() delMessage:EventEmitter<string> = new EventEmitter<string>();
+  @Output() memberDeleted:EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private memberService:MemberService, 
     private route:Router,
@@ -34,6 +35,9 @@ export class DeleteMemberComponent {
               summary: 'Confirmed',
               detail: 'Record Deleted Successfully.',
             });
+
+            
+            this.memberDeleted.emit(_id);
           },
           (error)=>{
             this.messageService.add({

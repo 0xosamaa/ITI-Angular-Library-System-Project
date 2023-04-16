@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<app-error-message [errorMessage]="error"></app-error-message>
-=======
 <app-error-message [errorMessage]="message"></app-error-message>
->>>>>>> dev
 <p-table
     #dt2
     [value]="members"
@@ -109,7 +105,7 @@
 <p-button id="add-btn" (click)="addForm()" label="+" styleClass="p-button-rounded"></p-button>  
 <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" -->
 
-<app-add-member></app-add-member>
-<app-delete-member (delMessage)="message"></app-delete-member>
-<app-edit-member [memberData]="memberData"></app-edit-member>
+<app-add-member (memberAdded)="updateList($event, 1)"></app-add-member>
+<app-delete-member (memberDeleted)="updateList($event, 2)"></app-delete-member>
+<app-edit-member [memberData]="memberData" (memberUpdated)="updateList($event, 3)"></app-edit-member>
 <app-member-details></app-member-details>
