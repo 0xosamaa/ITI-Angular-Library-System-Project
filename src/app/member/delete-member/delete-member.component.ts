@@ -11,11 +11,7 @@ import { ConfirmationService } from 'primeng/api';
   providers: [ConfirmationService, MessageService],
 })
 export class DeleteMemberComponent {
-<<<<<<< HEAD
-  error:string='';
-=======
   @Output() delMessage:EventEmitter<string> = new EventEmitter<string>();
->>>>>>> dev
   constructor(
     private memberService:MemberService, 
     private route:Router,
@@ -40,16 +36,11 @@ export class DeleteMemberComponent {
             });
           },
           (error)=>{
-<<<<<<< HEAD
-            console.log(error);
-            this.error = 'Error occured while deleting this member...';
-=======
             this.messageService.add({
               severity: 'info',
               summary: 'Rejected',
               detail: error.error.message,
             });
->>>>>>> dev
           }
         )
       },
