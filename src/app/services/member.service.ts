@@ -37,14 +37,7 @@ export class MemberService {
   }
 
   updateMember(member:FormData){
-    return this.http.put(this.baseURL+"/members", member).subscribe(
-      (res)=>{
-        console.log(res);
-      },
-      (error)=>{
-        console.log(error);
-      }
-    )
+    return this.http.put(this.baseURL+"/members", member);
   }
   
 }

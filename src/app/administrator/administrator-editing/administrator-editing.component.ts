@@ -22,6 +22,7 @@ import {
 export class AdministratorEditingComponent implements OnChanges {
   editFormGroup: FormGroup;
   visible: boolean = false;
+  email: string;
 
   @Input() currentAdmin: Administrator | null = null;
   @Output() administratorHasBeenEdited: EventEmitter<Administrator>;
@@ -40,6 +41,7 @@ export class AdministratorEditingComponent implements OnChanges {
       hireDate: ['', [Validators.required]],
     });
     this.administratorHasBeenEdited = new EventEmitter<Administrator>();
+    this.email = JSON.parse(localStorage.getItem('data') || '{}').email;
   }
 
   ngOnChanges(): void {
@@ -87,8 +89,10 @@ export class AdministratorEditingComponent implements OnChanges {
         this.currentAdmin = this.editFormGroup.value;
         this.administratorHasBeenEdited.emit(this.currentAdmin!);
         this.togglingEditModal();
+        console.log('oooooooooooooooooooooooo');
       },
       error: (error: any) => {
+        console.log('oooooooooooooooooooooooo');
         // Showing the Validation Errors to user on Template
         let errorMessage = error.error.message;
 

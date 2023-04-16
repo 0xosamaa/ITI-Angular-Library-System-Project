@@ -1,12 +1,6 @@
 import { AdministratorService } from 'src/app/services/administrator.service';
 import { Administrator } from './../../_models/administrator';
-import {
-  Component,
-  ViewChild,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ViewChild, OnChanges } from '@angular/core';
 import { AdministratorAddingComponent } from '../administrator-adding/administrator-adding.component';
 import { AdministratorDetailsComponent } from '../administrator-details/administrator-details.component';
 import { AdministratorEditingComponent } from '../administrator-editing/administrator-editing.component';
@@ -21,14 +15,16 @@ import {
   styleUrls: ['./administrator-list.component.css'],
   providers: [ConfirmationService, MessageService],
 })
-export class AdministratorListComponent implements OnInit, OnChanges {
+export class AdministratorListComponent implements OnChanges {
   administratorList: Administrator[] = [];
   wantedAdmin: Administrator | null = null;
 
   @ViewChild(AdministratorAddingComponent)
   addChild: AdministratorAddingComponent | undefined;
+
   @ViewChild(AdministratorDetailsComponent)
   viewChild: AdministratorDetailsComponent | undefined;
+
   @ViewChild(AdministratorEditingComponent)
   editChild: AdministratorEditingComponent | undefined;
 
@@ -36,8 +32,7 @@ export class AdministratorListComponent implements OnInit, OnChanges {
     private adminService: AdministratorService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
-  ) {}
-  ngOnChanges(): void {
+  ) {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
         this.administratorList = data.data;
@@ -47,7 +42,8 @@ export class AdministratorListComponent implements OnInit, OnChanges {
       }
     );
   }
-  ngOnInit() {
+
+  ngOnChanges(): void {
     this.adminService.getAllAdministrators().subscribe(
       (data: any) => {
         this.administratorList = data.data;

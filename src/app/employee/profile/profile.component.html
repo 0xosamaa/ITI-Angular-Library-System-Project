@@ -1,61 +1,84 @@
 <div style="padding: 80px" class="container-fluid d-flex row gap-4">
-    <p-messages *ngIf="userData.settings == 'default'" [(value)]="message" [enableService]="false" [closable]="false"></p-messages>
-  <div style="padding: 20px" class="card col-4 d-flex align-items-center flex-column">
+  <p-messages
+    *ngIf="userData.settings == 'default'"
+    [(value)]="message"
+    [enableService]="false"
+    [closable]="false"
+  ></p-messages>
+  <div
+    style="padding: 20px"
+    class="card col-4 d-flex align-items-center flex-column"
+  >
     <div class="img">
-      <img src="http://localhost:8080/images/Employee/{{userData.image}}" alt="Paris" style="width:100%;">
+      <img
+        src="http://localhost:8080/images/Employee/{{ userData.image }}"
+        alt="Paris"
+        style="width: 100%"
+      />
     </div>
     <div class="buttons">
-      <p-button (click)="logout()" label="LogOut" styleClass="p-button-outlined p-button-danger"></p-button>
-      <p-button (click)="updateProfile()" label="Update Profile" styleClass="p-button-outlined p-button-success"></p-button>
+      <p-button
+        (click)="logout()"
+        label="LogOut"
+        styleClass="p-button-outlined p-button-danger"
+      ></p-button>
+      <p-button
+        (click)="updateProfile()"
+        label="Update Profile"
+        styleClass="p-button-outlined p-button-success"
+      ></p-button>
       <!--<p-button (click)="updateImage()" label="Change Image" styleClass="p-button-outlined p-button-primary"></p-button>-->
     </div>
   </div>
   <div class="card col-7">
-
     <div class="info">
-        <div class="card1">
-          <h3>First Name : </h3>
-          <h4>{{userData.firstName}}</h4>
-        </div>
-        <p-divider></p-divider>
-        <div class="card1">
-          <h3>Last Name : </h3>
-          <h4>{{userData.lastName}}</h4>
-        </div>
-        <p-divider></p-divider>
-        <div class="card1">
-          <h3>Email : </h3>
-          <h4>{{userData.email}}</h4>
-        </div>
-        <p-divider></p-divider>
-        <div class="card1">
-          <h3>Salary : </h3>
-          <h4>{{userData.salary}}</h4>
-        </div>
-        <p-divider></p-divider>
-        <div class="card1">
-          <h3>BirthDate : </h3>
-          <h4>{{userData.birthDate}}</h4>
-        </div>
-        <p-divider></p-divider>
-        <div class="card1">
-          <h3>HireDate : </h3>
-          <h4>{{userData.hireDate}}</h4>
-        </div>
+      <div class="card1">
+        <h3>First Name :</h3>
+        <h4>{{ userData.firstName }}</h4>
       </div>
-
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Last Name :</h3>
+        <h4>{{ userData.lastName }}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Email :</h3>
+        <h4>{{ userData.email }}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>Salary :</h3>
+        <h4>{{ userData.salary }}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>BirthDate :</h3>
+        <h4>{{ userData.birthDate }}</h4>
+      </div>
+      <p-divider></p-divider>
+      <div class="card1">
+        <h3>HireDate :</h3>
+        <h4>{{ userData.hireDate }}</h4>
+      </div>
+    </div>
   </div>
 
+  <app-update
+    [employee]="userData"
+    (updated)="updateData()"
+    user="emp"
+  ></app-update>
 
-
-
-
-  <app-update [employee]="userData" (updated)="updateData()" user="emp" ></app-update>
-
-
+  <app-update [employee]="userData" user="emp"></app-update>
 </div>
 
-<p-dialog  header="Employee Information" [(visible)]="visible" [modal]="true" [style]="{width: '60vw' , height: '50vh'}">
+<p-dialog
+  header="Employee Information"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '60vw', height: '50vh' }"
+>
   <form [formGroup]="myForm" (ngSubmit)="submit()">
     <div class="form-group">
       <label for="file">File</label>
@@ -64,12 +87,20 @@
         id="file"
         type="file"
         class="form-control"
-        (change)="onFileChange($event)">
-      <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
-        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+        (change)="onFileChange($event)"
+      />
+      <div
+        *ngIf="f['file'].touched && f['file'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['file'].errors && f['file'].errors['required']">
+          File is required.
+        </div>
       </div>
     </div>
 
-    <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit">Submit</button>
+    <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit">
+      Submit
+    </button>
   </form>
 </p-dialog>

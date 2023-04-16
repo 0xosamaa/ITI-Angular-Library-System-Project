@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" *ngIf="email == 'BasicAdmin@Library.Co'">
         <label for="email" class="form-label">Email</label>
         <input
           type="email"
@@ -91,7 +91,7 @@
           >
         </div>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" *ngIf="email == 'BasicAdmin@Library.Co'">
         <label for="salary" class="form-label">Salary</label>
         <input
           type="text"
@@ -118,7 +118,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-6" *ngIf="email == 'BasicAdmin@Library.Co'">
           <label for="template" class="col-12 my-2">Hire Date</label>
           <p-calendar
             styleClass="input-styling col-6"

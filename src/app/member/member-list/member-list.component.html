@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <app-error-message [errorMessage]="error"></app-error-message>
+=======
+<app-error-message [errorMessage]="message"></app-error-message>
+>>>>>>> dev
 <p-table
     #dt2
     [value]="members"
@@ -106,6 +110,6 @@
 <!-- *ngIf="authService.isLoggedIn && authService.role !== 'member'" -->
 
 <app-add-member></app-add-member>
-<app-delete-member></app-delete-member>
-<app-edit-member></app-edit-member>
+<app-delete-member (delMessage)="message"></app-delete-member>
+<app-edit-member [memberData]="memberData"></app-edit-member>
 <app-member-details></app-member-details>

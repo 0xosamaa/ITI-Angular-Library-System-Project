@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+=======
+import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+>>>>>>> dev
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,14 +14,31 @@ import { MemberService } from 'src/app/services/member.service';
   templateUrl: './edit-member.component.html',
   styleUrls: ['./edit-member.component.css']
 })
+<<<<<<< HEAD
 export class EditMemberComponent{
+=======
+export class EditMemberComponent implements OnChanges{
+>>>>>>> dev
 
+  message:EventEmitter<string> = new EventEmitter<string>;
   flag:boolean = false;
+<<<<<<< HEAD
   @Input() memberData:Member | null = null;
   memberEditForm:FormGroup;
   isEditing = false;
 
   constructor(private formBuilder:FormBuilder, private memberService:MemberService, private router:Router){
+=======
+  @Input() memberData?:Member;
+  memberEditForm:FormGroup;
+  isEditing = false;
+
+  constructor(
+    private formBuilder:FormBuilder, 
+    private memberService:MemberService, 
+    private router:Router, 
+    ){
+>>>>>>> dev
     this.memberEditForm = this.formBuilder.group({
       fullName: ['',[Validators.required, Validators.minLength(3)]],
       email: ['',[Validators.required, Validators.email]],
@@ -29,12 +50,19 @@ export class EditMemberComponent{
 
   
   ngOnChanges(): void {
+<<<<<<< HEAD
     console.log("test on change...")
     if (this.memberData) {
       let oldDate = this.memberData.birthDate || '';
       let dateFormat = new Date(oldDate);
       console.log(dateFormat)
       this.memberEditForm.setValue({
+=======
+    if (this.memberData) {
+      let oldDate = this.memberData.birthDate || '';
+      let dateFormat = new Date(oldDate);
+      this.memberEditForm.patchValue({
+>>>>>>> dev
         fullName: this.memberData.fullName,
         email: this.memberData.email,
         birthDate: dateFormat,
@@ -46,6 +74,7 @@ export class EditMemberComponent{
       this.memberEditForm.reset();
       this.isEditing = false;
     }
+<<<<<<< HEAD
   }
 
   showForm(){
@@ -55,6 +84,15 @@ export class EditMemberComponent{
   }
 
   update(){
+=======
+  }
+
+  showForm(){
+    this.flag = true;
+  }
+
+  update(){  
+>>>>>>> dev
     if (this.memberEditForm.valid) {
       this.flag = false;
       let memberNewData = new FormData();
@@ -62,12 +100,17 @@ export class EditMemberComponent{
       memberNewData.append('fullName', this.memberEditForm.get('fullName')?.value);
       memberNewData.append('email', this.memberEditForm.get('email')?.value);
       
+<<<<<<< HEAD
       if(this.memberEditForm.get('phoneNumber') !== undefined){
+=======
+      if(this.memberEditForm.get('phoneNumber')?.value != null){
+>>>>>>> dev
         const phoneNumberString = this.memberEditForm.get('phoneNumber')?.value.toString();
         const phoneNumberDigitsOnly = phoneNumberString.replace(/\D/g, '');
 
         memberNewData.append('phoneNumber', phoneNumberDigitsOnly);
       }
+<<<<<<< HEAD
       if(this.memberEditForm.get('birthDate') !== undefined){
         memberNewData.append('birthDate', this.memberEditForm.get('birthDate')?.value.toISOString());
       }
@@ -77,6 +120,23 @@ export class EditMemberComponent{
 
       this.memberService.updateMember(memberNewData);
       this.router.navigate(["/members"]);
+=======
+      if(this.memberEditForm.get('birthDate')?.value !== undefined){
+        memberNewData.append('birthDate', this.memberEditForm.get('birthDate')?.value.toISOString());
+      }
+      if(this.memberEditForm.get('image')?.value !== undefined){
+        memberNewData.append('image', this.memberEditForm.get('image')?.value);
+      }
+
+      this.memberService.updateMember(memberNewData).subscribe(
+        (res)=>{
+          console.log(res);
+        },
+        (error)=>{
+        }
+      );
+      // this.router.navigate(["/members"]);
+>>>>>>> dev
     }else {
       // show error messages
       Object.keys(this.memberEditForm.controls).forEach(field => {

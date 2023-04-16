@@ -49,6 +49,7 @@ import { AdministratorReportComponent } from './report/administrator-report/admi
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { AdministratorProfileComponent } from './administrator/administrator-profile/administrator-profile.component';
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { AddMemberComponent } from './member/add-member/add-member.component';
 import { EditMemberComponent } from './member/edit-member/edit-member.component';
@@ -56,14 +57,13 @@ import { MemberDetailsComponent } from './member/member-details/member-details.c
 import { DeleteMemberComponent } from './member/delete-member/delete-member.component';
 import { HomeComponent } from './home/home.component';
 
-import { ErrorMessageComponent } from './error-message/error-message.component';
 
 import { BorrowDetailsComponent } from './borrow/borrow-details/borrow-details.component';
 import { BorrowAddingComponent } from './borrow/borrow-adding/borrow-adding.component';
 import { BorrowEditingComponent } from './borrow/borrow-editing/borrow-editing.component';
 import { BorrowListComponent } from './borrow/borrow-list/borrow-list.component';
 import { BorrowComponent } from './borrow/borrow.component';
-
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -101,12 +101,13 @@ import { BorrowComponent } from './borrow/borrow.component';
     ErrorMessageComponent,
 
     
+    AdministratorProfileComponent,
     BorrowDetailsComponent,
     BorrowAddingComponent,
     BorrowEditingComponent,
     BorrowListComponent,
     BorrowComponent,
-
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,
